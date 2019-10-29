@@ -3,6 +3,7 @@ import React from "react";
 import LoginForm from "../Components/Auth/loginForm";
 import Background from "../../public/background.jpg"
 import OnOffSwitch from "../Components/miniComponent/onOffSwitch";
+import RegisterForm from "../Components/Auth/registerForm";
 
 interface AuthPageProps {
     register: boolean
@@ -32,7 +33,7 @@ class AuthPage extends Component<AuthPageProps, AuthPageState> {
                     {this.state.register ?
                         <>
                             <h1>Inscription</h1>
-
+                            <RegisterForm/>
                         </>
                         :
                         <>
