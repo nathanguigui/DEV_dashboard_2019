@@ -68,27 +68,27 @@ class RegisterForm extends React.Component <Object, RegisterFormState>{
         return(
             <form style={formStyle}>
                 <label className="matter-textfield-outlined">
-                    <input onChange={this.handleChange} type="name" id="name" name="name"/>
+                    <input onChange={this.handleChange} type="name" id="name" name="name" placeholder=" "/>
                     <span>Name:</span>
                 </label>
                 <label className="matter-textfield-outlined">
-                    <input onChange={this.handleChange} type="surname" id="surname" name="surname"/>
+                    <input onChange={this.handleChange} type="surname" id="surname" name="surname" placeholder=" "/>
                     <span>surname:</span>
                 </label>
                 <label className="matter-textfield-outlined">
-                    <input onChange={this.handleChange} type="email" id="email" name="email"/>
+                    <input onChange={this.handleChange} type="email" id="email" name="email" placeholder=" "/>
                     <span>email:</span>
                 </label>
                 <label className="matter-textfield-outlined">
-                    <input onChange={this.handleChange} type="password" id="password" name="password"/>
+                    <input onChange={this.handleChange} type="password" id="password" name="password" placeholder=" "/>
                     <span>password:</span>
                 </label>
                 <label className="matter-textfield-outlined">
-                    <input onChange={this.handleChange} type="address" id="address" name="address"/>
+                    <input onChange={this.handleChange} type="address" id="address" name="address" placeholder=" "/>
                     <span>address:</span>
                 </label>
                 <label className="matter-textfield-outlined">
-                    <input onChange={this.handleChange} type="phone" id="phone" name="phone"/>
+                    <input onChange={this.handleChange} type="phone" id="phone" name="phone" placeholder=" "/>
                     <span>Phone:</span>
                 </label>
                 <button className="matter-button-contained" type="submit" onClick={this.handleSubmit}>Register</button>
