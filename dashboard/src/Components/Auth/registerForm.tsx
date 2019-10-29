@@ -1,7 +1,7 @@
 import React, {Component, CSSProperties} from "react";
 import {GraphqlClient} from "../../App";
 import {SIGNUP_MUTATION, SignupMutationData, SignupMutationsVars} from "../../Graphql/Auth/Mutation/Register";
-
+import "../../Styles/outlinedForm.css";
 
 interface RegisterFormState {
     name: string,
@@ -67,19 +67,31 @@ class RegisterForm extends React.Component <Object, RegisterFormState>{
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
             <form style={formStyle}>
-                <label htmlFor="name">Name:</label>
-                <input onChange={this.handleChange} type="name" id="name" name="name"/>
-                <label htmlFor="surname">surname:</label>
-                <input onChange={this.handleChange} type="surname" id="surname" name="surname"/>
-                <label htmlFor="email">email:</label>
-                <input onChange={this.handleChange} type="email" id="email" name="email"/>
-                <label htmlFor="password">password:</label>
-                <input onChange={this.handleChange} type="password" id="password" name="password"/>
-                <label htmlFor="address">address:</label>
-                <input onChange={this.handleChange} type="address" id="address" name="address"/>
-                <label htmlFor="phone">Phone:</label>
-                <input onChange={this.handleChange} type="phone" id="phone" name="phone"/>
-                <button type="submit" onClick={this.handleSubmit}>Register</button>
+                <label htmlFor="name">
+                    <input onChange={this.handleChange} type="name" id="name" name="name"/>
+                    <span>Name:</span>
+                </label>
+                <label htmlFor="surname">
+                    <input onChange={this.handleChange} type="surname" id="surname" name="surname"/>
+                    <span>surname:</span>
+                </label>
+                <label htmlFor="email">
+                    <input onChange={this.handleChange} type="email" id="email" name="email"/>
+                    <span>email:</span>
+                </label>
+                <label htmlFor="=password">
+                    <input onChange={this.handleChange} type="password" id="password" name="password"/>
+                    <span>password:</span>
+                </label>
+                <label htmlFor="address">
+                    <input onChange={this.handleChange} type="address" id="address" name="address"/>
+                    <span>address:</span>
+                </label>
+                <label htmlFor="phone">
+                    <input onChange={this.handleChange} type="phone" id="phone" name="phone"/>
+                    <span>Phone:</span>
+                </label>
+                <button className="matter-button-contained" type="submit" onClick={this.handleSubmit}>Register</button>
                 {this.state.error.length !== 0 && <p>{this.state.error}</p>}
             </form>
         );
