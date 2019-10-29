@@ -1,0 +1,366 @@
+.matter-textfield-outlined {
+    --matter-helper-theme: rgb(var(--matter-theme-rgb, var(--matter-primary-rgb, 33, 150, 243)));
+    --matter-helper-safari1: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.38);
+    --matter-helper-safari2: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.6);
+    --matter-helper-safari3: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.87);
+    position: relative;
+    display: inline-block;
+    padding-top: 6px;
+    font-family: var(--matter-font-family, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Input, Textarea */
+.matter-textfield-outlined > input,
+.matter-textfield-outlined > textarea {
+    box-sizing: border-box;
+    margin: 0;
+    border-style: solid;
+    border-width: 1px;
+    border-color: transparent var(--matter-helper-safari2) var(--matter-helper-safari2);
+    border-radius: 4px;
+    padding: 15px 13px 15px;
+    width: 100%;
+    height: inherit;
+    color: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.87);
+    -webkit-text-fill-color: currentColor; /* Safari */
+    background-color: transparent;
+    box-shadow: inset 1px 0 transparent, inset -1px 0 transparent, inset 0 -1px transparent;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    caret-color: var(--matter-helper-theme);
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.matter-textfield-outlined > input:not(:focus):placeholder-shown,
+.matter-textfield-outlined > textarea:not(:focus):placeholder-shown {
+    border-top-color: var(--matter-helper-safari2);
+}
+
+/* Span */
+.matter-textfield-outlined > input + span,
+.matter-textfield-outlined > textarea + span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    max-height: 100%;
+    color: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.6);
+    font-size: 75%;
+    line-height: 15px;
+    cursor: text;
+    transition: color 0.2s, font-size 0.2s, line-height 0.2s;
+}
+
+.matter-textfield-outlined > input:not(:focus):placeholder-shown + span,
+.matter-textfield-outlined > textarea:not(:focus):placeholder-shown + span {
+    font-size: inherit;
+    line-height: 68px;
+}
+
+/* Corners */
+.matter-textfield-outlined > input + span::before,
+.matter-textfield-outlined > input + span::after,
+.matter-textfield-outlined > textarea + span::before,
+.matter-textfield-outlined > textarea + span::after {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    margin-top: 6px;
+    border-top: solid 1px var(--matter-helper-safari2);
+    min-width: 10px;
+    height: 8px;
+    pointer-events: none;
+    box-shadow: inset 0 1px transparent;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.matter-textfield-outlined > input + span::before,
+.matter-textfield-outlined > textarea + span::before {
+    margin-right: 4px;
+    border-left: solid 1px transparent;
+    border-radius: 4px 0;
+}
+
+.matter-textfield-outlined > input + span::after,
+.matter-textfield-outlined > textarea + span::after {
+    flex-grow: 1;
+    margin-left: 4px;
+    border-right: solid 1px transparent;
+    border-radius: 0 4px;
+}
+
+.matter-textfield-outlined > input:not(:focus):placeholder-shown + span::before,
+.matter-textfield-outlined > textarea:not(:focus):placeholder-shown + span::before,
+.matter-textfield-outlined > input:not(:focus):placeholder-shown + span::after,
+.matter-textfield-outlined > textarea:not(:focus):placeholder-shown + span::after {
+    border-top-color: transparent;
+}
+
+/* Hover */
+.matter-textfield-outlined:hover > input,
+.matter-textfield-outlined:hover > textarea {
+    border-color: transparent var(--matter-helper-safari3) var(--matter-helper-safari3);
+}
+
+.matter-textfield-outlined:hover > input + span::before,
+.matter-textfield-outlined:hover > textarea + span::before,
+.matter-textfield-outlined:hover > input + span::after,
+.matter-textfield-outlined:hover > textarea + span::after {
+    border-top-color: var(--matter-helper-safari3);
+}
+
+.matter-textfield-outlined:hover > input:not(:focus):placeholder-shown,
+.matter-textfield-outlined:hover > textarea:not(:focus):placeholder-shown {
+    border-color: var(--matter-helper-safari3);
+}
+
+/* Focus */
+.matter-textfield-outlined > input:focus,
+.matter-textfield-outlined > textarea:focus {
+    border-color: transparent var(--matter-helper-theme) var(--matter-helper-theme);
+    box-shadow: inset 1px 0 var(--matter-helper-theme), inset -1px 0 var(--matter-helper-theme), inset 0 -1px var(--matter-helper-theme);
+    outline: none;
+}
+
+.matter-textfield-outlined > input:focus + span,
+.matter-textfield-outlined > textarea:focus + span {
+    color: var(--matter-helper-theme);
+}
+
+.matter-textfield-outlined > input:focus + span::before,
+.matter-textfield-outlined > input:focus + span::after,
+.matter-textfield-outlined > textarea:focus + span::before,
+.matter-textfield-outlined > textarea:focus + span::after {
+    border-top-color: var(--matter-helper-theme) !important;
+    box-shadow: inset 0 1px var(--matter-helper-theme);
+}
+
+/* Disabled */
+.matter-textfield-outlined > input:disabled,
+.matter-textfield-outlined > input:disabled + span,
+.matter-textfield-outlined > textarea:disabled,
+.matter-textfield-outlined > textarea:disabled + span {
+    border-color: transparent var(--matter-helper-safari1) var(--matter-helper-safari1) !important;
+    color: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.38);
+    pointer-events: none;
+}
+
+.matter-textfield-outlined > input:disabled + span::before,
+.matter-textfield-outlined > input:disabled + span::after,
+.matter-textfield-outlined > textarea:disabled + span::before,
+.matter-textfield-outlined > textarea:disabled + span::after {
+    border-top-color: var(--matter-helper-safari1) !important;
+}
+
+.matter-textfield-outlined > input:disabled:placeholder-shown,
+.matter-textfield-outlined > input:disabled:placeholder-shown + span,
+.matter-textfield-outlined > textarea:disabled:placeholder-shown,
+.matter-textfield-outlined > textarea:disabled:placeholder-shown + span {
+    border-top-color: var(--matter-helper-safari1) !important;
+}
+
+.matter-textfield-outlined > input:disabled:placeholder-shown + span::before,
+.matter-textfield-outlined > input:disabled:placeholder-shown + span::after,
+.matter-textfield-outlined > textarea:disabled:placeholder-shown + span::before,
+.matter-textfield-outlined > textarea:disabled:placeholder-shown + span::after {
+    border-top-color: transparent !important;
+}
+
+/* Faster transition in Safari for less noticable fractional font-size issue */
+@media not all and (min-resolution:.001dpcm) {
+    @supports (-webkit-appearance:none) {
+        .matter-textfield-outlined > input,
+        .matter-textfield-outlined > input + span,
+        .matter-textfield-outlined > textarea,
+        .matter-textfield-outlined > textarea + span,
+        .matter-textfield-outlined > input + span::before,
+        .matter-textfield-outlined > input + span::after,
+        .matter-textfield-outlined > textarea + span::before,
+        .matter-textfield-outlined > textarea + span::after {
+            transition-duration: 0.1s;
+        }
+    }
+}
+
+.matter-button-outlined {
+    --matter-helper-theme: var(--matter-theme-rgb, var(--matter-primary-rgb, 33, 150, 243));
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0;
+    border: solid 1px; /* Safari */
+    border-color: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.24);
+    border-radius: 4px;
+    padding: 0 16px;
+    min-width: 64px;
+    height: 36px;
+    vertical-align: middle;
+    text-align: center;
+    text-overflow: ellipsis;
+    color: rgb(var(--matter-helper-theme));
+    background-color: transparent;
+    font-family: var(--matter-font-family, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 34px;
+    outline: none;
+    cursor: pointer;
+}
+
+.matter-button-outlined::-moz-focus-inner {
+    border: none;
+}
+
+/* Highlight, Ripple */
+.matter-button-outlined::before,
+.matter-button-outlined::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 3px;
+    opacity: 0;
+}
+
+.matter-button-outlined::before {
+    background-color: rgb(var(--matter-helper-theme));
+    transition: opacity 0.2s;
+}
+
+.matter-button-outlined::after {
+    background: radial-gradient(circle at center, currentColor 1%, transparent 1%) center/10000% 10000% no-repeat;
+    transition: opacity 1s, background-size 0.5s;
+}
+
+/* Hover, Focus */
+.matter-button-outlined:hover::before {
+    opacity: 0.04;
+}
+
+.matter-button-outlined:focus::before {
+    opacity: 0.12;
+}
+
+.matter-button-outlined:hover:focus::before {
+    opacity: 0.16;
+}
+
+/* Active */
+.matter-button-outlined:active::after {
+    opacity: 0.16;
+    background-size: 100% 100%;
+    transition: background-size 0s;
+}
+
+/* Disabled */
+.matter-button-outlined:disabled {
+    color: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.38);
+    background-color: transparent;
+    cursor: initial;
+}
+
+.matter-button-outlined:disabled::before,
+.matter-button-outlined:disabled::after {
+    opacity: 0;
+}
+
+.matter-button-contained {
+    --matter-helper-theme: var(--matter-theme-rgb, var(--matter-primary-rgb, 33, 150, 243));
+    --matter-helper-ontheme: var(--matter-ontheme-rgb, var(--matter-onprimary-rgb, 255, 255, 255));
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+    padding: 0 16px;
+    min-width: 64px;
+    height: 36px;
+    vertical-align: middle;
+    text-align: center;
+    text-overflow: ellipsis;
+    color: rgb(var(--matter-helper-ontheme));
+    background-color: rgb(var(--matter-helper-theme));
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    font-family: var(--matter-font-family, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 36px;
+    outline: none;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.matter-button-contained::-moz-focus-inner {
+    border: none;
+}
+
+/* Highlight, Ripple */
+.matter-button-contained::before,
+.matter-button-contained::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    opacity: 0;
+}
+
+.matter-button-contained::before {
+    background-color: rgb(var(--matter-helper-ontheme));
+    transition: opacity 0.2s;
+}
+
+.matter-button-contained::after {
+    background: radial-gradient(circle at center, currentColor 1%, transparent 1%) center/10000% 10000% no-repeat;
+    transition: opacity 1s, background-size 0.5s;
+}
+
+/* Hover, Focus */
+.matter-button-contained:hover,
+.matter-button-contained:focus {
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.matter-button-contained:hover::before {
+    opacity: 0.08;
+}
+
+.matter-button-contained:focus::before {
+    opacity: 0.24;
+}
+
+.matter-button-contained:hover:focus::before {
+    opacity: 0.32;
+}
+
+/* Active */
+.matter-button-contained:active {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.matter-button-contained:active::after {
+    opacity: 0.32;
+    background-size: 100% 100%;
+    transition: background-size 0s;
+}
+
+/* Disabled */
+.matter-button-contained:disabled {
+    color: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.38);
+    background-color: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.12);
+    box-shadow: none;
+    cursor: initial;
+}
+
+.matter-button-contained:disabled::before,
+.matter-button-contained:disabled::after {
+    opacity: 0;
+}

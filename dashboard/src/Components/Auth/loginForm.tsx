@@ -1,6 +1,7 @@
 import React, {Component, CSSProperties} from "react";
 import {GraphqlClient} from "../../App";
 import {LOGIN_MUTATION, LoginMutationData, LoginMutationsVars} from "../../Graphql/Auth/Mutation/Login";
+import "../../Styles/outlinedForm.css"
 
 interface LoginFormState {
     email: string,
@@ -43,6 +44,8 @@ class LoginForm extends Component<Object, LoginFormState> {
             }).then((res) => {
                 res.data && res.data.login && window.localStorage.setItem("token", res.data.login.token);
                 window.location.href = "/";
+            }).catch((res) => {
+                this.setState({error: "Informations invalides", valid: false})
             })
         } else
             this.setState({error: "Informations incomplètes"});
@@ -51,13 +54,17 @@ class LoginForm extends Component<Object, LoginFormState> {
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return (
             <form style={formStyle}>
-                <label htmlFor="email">Email:</label>
-                <input onChange={this.handleChange} type="email" id="email" name="email"/>
-                <label htmlFor="password">Mot de passe:</label>
-                <input onChange={this.handleChange} type="password" id="password" name="password"/>
-                <button type="submit" onClick={this.handleSubmit}>Connexion</button>
+                <label className="matter-textfield-outlined">
+                    <input placeholder=" " onChange={this.handleChange} type="email" id="email" name="email"/>
+                    <span>Email:</span>
+                </label>
+                <label className="matter-textfield-outlined">
+                    <input placeholder=" " onChange={this.handleChange} type="password" id="password" name="password"/>
+                    <span>Mot de passe:</span>
+                </label>
+                <button style={{marginTop: 6, marginBottom: 6}} className="matter-button-contained" type="submit" onClick={this.handleSubmit}>Connexion</button>
                 {this.state.error.length !== 0 &&
-                <p>{this.state.error}</p>}
+                <p style={{marginTop: 0, color: "red"}}>{this.state.error}</p>}
             </form>
         );
     }
