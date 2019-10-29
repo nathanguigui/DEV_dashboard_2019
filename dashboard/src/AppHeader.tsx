@@ -31,14 +31,14 @@ export function AppHeader(disableSidebar: () => void, sidebarDisabled: boolean) 
                 <>
                     {(context.token) ?
                         <>
-                            <NavBar disableSidebar={disableSidebar}/>
+                            <NavBar sidebarDisabled={sidebarDisabled} disableSidebar={disableSidebar}/>
                             <SideBar sidebarDisabled={sidebarDisabled}/>
                         </>
                         :
                         <>
                             <Route path="/login"><AuthPage register={false}/></Route>
                             <Route path="/register"><AuthPage register={true}/></Route>
-                            <PrivateRoute exact path="/"><p>yoyo</p></PrivateRoute>
+                            <PrivateRoute exact path="/"><p>nothing</p></PrivateRoute>
                         </>
                     }
 

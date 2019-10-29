@@ -1,8 +1,11 @@
 import React, {CSSProperties} from "react";
 import AppColors from "../../AppColors";
+import Bars from "../../Assets/bars-solid.svg"
+import "../../Styles/animation.css"
 
 interface NavBarProps {
     disableSidebar: () => void
+    sidebarDisabled: boolean
 }
 
 class NavBar extends React.Component<NavBarProps> {
@@ -20,8 +23,8 @@ class NavBar extends React.Component<NavBarProps> {
         return (
             <div style={containerStyle}>
                 <div style={itemSeparator}>
-                    <div>
-                        <p onClick={this.props.disableSidebar}>toto</p>
+                    <div style={{maxWidth: "55px"}}>
+                        <img style={{width: "75%", margin: "5px"}} className={this.props.sidebarDisabled ? "rotate-90-ccw" : "rotate-90-cw"} onClick={this.props.disableSidebar} src={Bars}/>
                     </div>
                     <div>
                         <button className="matter-button-contained" onClick={this.handleDisconnect}>Disconnection</button>
