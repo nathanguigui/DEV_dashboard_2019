@@ -60,7 +60,7 @@ class LoginForm extends Component<Object, LoginFormState> {
                 </label>
                 <label className="matter-textfield-outlined">
                     <input placeholder=" " onChange={this.handleChange} type="password" id="password" name="password"/>
-                    <span>Mot de passe:</span>
+                    <span>Password:</span>
                 </label>
                 <button style={{marginTop: 6, marginBottom: 6}} className="matter-button-contained" type="submit" onClick={this.handleSubmit}>Connexion</button>
                 {this.state.error.length !== 0 &&
