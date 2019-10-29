@@ -11,6 +11,6 @@ export const UpdateMeInput = inputObjectType({
         t.string('googleToken'),
         t.string('intraToken'),
         t.boolean('sidebarDisabled'),
-        t.string('phone'),
+        t.string('phone')
     },
 });
