@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen": "graphql-codegen --config codegen.yml"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@graphql-codegen/typescript": "1.5.0",
+    "@graphql-codegen/typescript-operations": "1.5.0",
+    "@graphql-codegen/introspection": "1.5.0"
+  }
+}

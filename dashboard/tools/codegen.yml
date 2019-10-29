@@ -1,0 +1,6 @@
+overwrite: true
+schema: "http://pastek.space:4000"
+generates:
+  out/client.ts:
+    plugins:
+      - "typescript"
