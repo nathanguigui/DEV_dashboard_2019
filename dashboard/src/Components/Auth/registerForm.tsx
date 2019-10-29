@@ -91,7 +91,7 @@ class RegisterForm extends React.Component <Object, RegisterFormState>{
                     <input onChange={this.handleChange} type="phone" id="phone" name="phone" placeholder=" "/>
                     <span>Phone:</span>
                 </label>
-                <button className="matter-button-contained" type="submit" onClick={this.handleSubmit}>Register</button>
+                <button style={{marginTop: 6, marginBottom: 12}} className="matter-button-contained" type="submit" onClick={this.handleSubmit}>Register</button>
                 {this.state.error.length !== 0 && <p>{this.state.error}</p>}
             </form>
         );

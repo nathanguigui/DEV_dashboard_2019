@@ -62,7 +62,7 @@ class LoginForm extends Component<Object, LoginFormState> {
                     <input placeholder=" " onChange={this.handleChange} type="password" id="password" name="password"/>
                     <span>Password:</span>
                 </label>
-                <button style={{marginTop: 6, marginBottom: 6}} className="matter-button-contained" type="submit" onClick={this.handleSubmit}>Connexion</button>
+                <button style={{marginTop: 6, marginBottom: 12}} className="matter-button-contained" type="submit" onClick={this.handleSubmit}>Connexion</button>
                 {this.state.error.length !== 0 &&
                 <p style={{marginTop: 0, color: "red"}}>{this.state.error}</p>}
             </form>
