@@ -3,9 +3,14 @@ import AppColors from "../../AppColors";
 import {PrivateRoute} from "../Auth/privateRoute";
 import HomePage from "../../Pages/homePage";
 
-class SideBar extends React.Component {
+interface SideBarProps {
+    sidebarDisabled: boolean
+}
+
+class SideBar extends React.Component<SideBarProps> {
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
+            !this.props.sidebarDisabled ?
             <div style={containerStyle} className="containAllContent">
                 <div style={sidebarStyle} className="sidebar">
                     Sidebar
@@ -15,13 +20,21 @@ class SideBar extends React.Component {
                     <PrivateRoute path="/toto" exact component={HomePage}/>
                 </div>
             </div>
+            :
+            <div style={contentStyle} className="content">
+                <PrivateRoute path="/" exact component={HomePage}/>
+                <PrivateRoute path="/toto" exact component={HomePage}/>
+            </div>
         )
     }
 }
 
 const containerStyle : CSSProperties = {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    height: "100%",
+    position: "fixed",
+    width: "100%",
 };
 
 const sidebarStyle : CSSProperties = {

@@ -24,15 +24,15 @@ function PrivateRoute({ children, ...rest }) {
   );
 }
 
-export function AppHeader() {
+export function AppHeader(disableSidebar: () => void, sidebarDisabled: boolean) {
     return (
         <AuthContext.Consumer>
             {context => (
                 <>
                     {(context.token) ?
                         <>
-                            <NavBar/>
-                            <SideBar/>
+                            <NavBar disableSidebar={disableSidebar}/>
+                            <SideBar sidebarDisabled={sidebarDisabled}/>
                         </>
                         :
                         <>

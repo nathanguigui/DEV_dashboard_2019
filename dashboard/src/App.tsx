@@ -19,6 +19,7 @@ const InitialState = {
     token: window.localStorage.getItem("token"),
     search: "",
     component: LoginComponent,
+    sidebarDisabled: false
 };
 
 type AuthState = Readonly<typeof InitialState>
@@ -34,7 +35,12 @@ class App extends Component<object, AuthState> {
     constructor(props:any) {
         super(props);
         this.state = InitialState;
+        this.handleSidebarDisable = this.handleSidebarDisable.bind(this)
     }
+
+    handleSidebarDisable = () => {
+        this.setState({sidebarDisabled: !this.state.sidebarDisabled})
+    };
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         let appState = this.state;
@@ -42,7 +48,7 @@ class App extends Component<object, AuthState> {
             <AuthContext.Provider value={appState}>
                 <div className="App">
                     <Router>
-                        {AppHeader()}
+                        {AppHeader(this.handleSidebarDisable, this.state.sidebarDisabled)}
                     </Router>
                 </div>
             </AuthContext.Provider>

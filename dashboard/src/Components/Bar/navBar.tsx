@@ -1,7 +1,11 @@
 import React, {CSSProperties} from "react";
 import AppColors from "../../AppColors";
 
-class NavBar extends React.Component {
+interface NavBarProps {
+    disableSidebar: () => void
+}
+
+class NavBar extends React.Component<NavBarProps> {
 
     constructor(props:any) {
         super(props);
@@ -17,7 +21,7 @@ class NavBar extends React.Component {
             <div style={containerStyle}>
                 <div style={itemSeparator}>
                     <div>
-                        <p>toto</p>
+                        <p onClick={this.props.disableSidebar}>toto</p>
                     </div>
                     <div>
                         <div onClick={this.handleDisconnect}>deconnexion</div>
