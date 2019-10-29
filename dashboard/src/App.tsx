@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import ApoloClient from 'apollo-boost';
 import {
@@ -8,17 +7,17 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import LoginForm from "./Components/Auth/loginForm";
 import AuthPage from "./Pages/authPage";
 import HomePage from "./Pages/homePage";
 import {PrivateRoute} from "./Components/Auth/privateRoute";
+import {AppHeader} from "./AppHeader";
 
 
 const LoginComponent = <AuthPage register={false}/>
 
 const InitialState = {
     token: window.localStorage.getItem("token"),
-    search: "Pomme",
+    search: "",
     component: LoginComponent,
 };
 
@@ -34,46 +33,20 @@ export const GraphqlClient = new ApoloClient({
 class App extends Component<object, AuthState> {
     constructor(props:any) {
         super(props);
-        this.state = {
-            token: window.localStorage.getItem("token"),
-            search: "",
-            component: LoginComponent,
-        };
+        this.state = InitialState;
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
-      let tmp = this.state;
-      return (
-        <AuthContext.Provider value={tmp}>
-          <div className="App">
-            <Router>
-              <div>
-                <nav>
-                  <ul>
-                    <li>
-                      <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                      <Link to="/login">login</Link>
-                    </li>
-                    <li>
-                      <Link to="/register">register</Link>
-                    </li>
-                  </ul>
-                </nav>
-                <Switch>
-                  <Route path="/login">
-                    <AuthPage register={false}/>
-                  </Route>
-                  <Route path="/register">
-                  </Route>
-                  <PrivateRoute path="/" component={HomePage}/>
-                </Switch>
-              </div>
-            </Router>
-          </div>
-        </AuthContext.Provider>
-      );
+        let appState = this.state;
+        return (
+            <AuthContext.Provider value={appState}>
+                <div className="App">
+                    <Router>
+                        {AppHeader()}
+                    </Router>
+                </div>
+            </AuthContext.Provider>
+        );
     }
 }
 
