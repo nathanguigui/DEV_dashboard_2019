@@ -1,3 +1,9 @@
+/*
+
+COPYRIGHT https://github.com/finnhvman/matter
+
+ */
+
 .matter-textfield-outlined {
     --matter-helper-theme: rgb(var(--matter-theme-rgb, var(--matter-primary-rgb, 33, 150, 243)));
     --matter-helper-safari1: rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.38);

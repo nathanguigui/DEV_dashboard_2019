@@ -1,5 +1,5 @@
 import React, {CSSProperties} from "react";
-import AppColors from "../../AppColors";
+import AppColors from "../../Styles/AppColors";
 import Bars from "../../Assets/bars-solid.svg"
 import "../../Styles/animation.css"
 

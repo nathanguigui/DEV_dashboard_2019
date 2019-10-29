@@ -38,7 +38,7 @@ export function AppHeader(disableSidebar: () => void, sidebarDisabled: boolean) 
                         <>
                             <Route path="/login"><AuthPage register={false}/></Route>
                             <Route path="/register"><AuthPage register={true}/></Route>
-                            <PrivateRoute exact path="/"><p>nothing</p></PrivateRoute>
+                            <PrivateRoute exact path="/"><p>redirecting...</p></PrivateRoute>
                         </>
                     }
 
