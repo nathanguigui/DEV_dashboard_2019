@@ -24,7 +24,7 @@ class NavBar extends React.Component<NavBarProps> {
                         <p onClick={this.props.disableSidebar}>toto</p>
                     </div>
                     <div>
-                        <div onClick={this.handleDisconnect}>deconnexion</div>
+                        <button className="matter-button-contained" onClick={this.handleDisconnect}>Disconnection</button>
                     </div>
                 </div>
             </div>
