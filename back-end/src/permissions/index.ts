@@ -31,7 +31,7 @@ export const permissions = shield(
       productsConnection: and(rules.isAuthenticatedUser, rules.isAdminUser),*/
     },
     Mutation: {
-
+      updateMe: rules.isAuthenticatedUser,
     },
   }
 )
