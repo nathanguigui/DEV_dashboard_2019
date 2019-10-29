@@ -67,27 +67,27 @@ class RegisterForm extends React.Component <Object, RegisterFormState>{
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
             <form style={formStyle}>
-                <label htmlFor="name">
+                <label className="matter-textfield-outlined">
                     <input onChange={this.handleChange} type="name" id="name" name="name"/>
                     <span>Name:</span>
                 </label>
-                <label htmlFor="surname">
+                <label className="matter-textfield-outlined">
                     <input onChange={this.handleChange} type="surname" id="surname" name="surname"/>
                     <span>surname:</span>
                 </label>
-                <label htmlFor="email">
+                <label className="matter-textfield-outlined">
                     <input onChange={this.handleChange} type="email" id="email" name="email"/>
                     <span>email:</span>
                 </label>
-                <label htmlFor="=password">
+                <label className="matter-textfield-outlined">
                     <input onChange={this.handleChange} type="password" id="password" name="password"/>
                     <span>password:</span>
                 </label>
-                <label htmlFor="address">
+                <label className="matter-textfield-outlined">
                     <input onChange={this.handleChange} type="address" id="address" name="address"/>
                     <span>address:</span>
                 </label>
-                <label htmlFor="phone">
+                <label className="matter-textfield-outlined">
                     <input onChange={this.handleChange} type="phone" id="phone" name="phone"/>
                     <span>Phone:</span>
                 </label>
