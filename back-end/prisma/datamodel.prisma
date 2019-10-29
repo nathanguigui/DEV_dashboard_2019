@@ -10,7 +10,7 @@ type User {
   name: String!
   surname: String!
   address: String
-  refreshTime: Integer @default(value: 5)
+  refreshTime: Int @default(value: 5)
   backgroundImage: String
   sidebarDisabled: Boolean
   googleToken: String
