@@ -37,7 +37,6 @@ class SideBar extends React.Component<SideBarProps, SideBarState> {
         this.updateContent();
     }
 
-
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
             <div style={containerStyle} className="containAllContent">
