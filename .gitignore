@@ -1,2 +1,7 @@
 ./back-end/node_modules/
 ./back-end/src/generated/
+.gitignore
+node_modules/
+out/
+package-lock.json
+test.json
