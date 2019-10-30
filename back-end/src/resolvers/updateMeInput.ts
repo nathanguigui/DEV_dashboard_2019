@@ -3,8 +3,8 @@ import {inputObjectType, objectType} from "nexus";
 export const UpdateMeWidgetsInput = inputObjectType({
     name: "UpdateMeWidgetsInput",
     definition(t) {
-        t.list.field('connect', {type: "WidgetWhereUniqueInput" as any})
-        t.list.field('disconnect', {type: "WidgetWhereUniqueInput" as any})
+        t.list.field('connect', {type: "WidgetWhereUniqueInput"})
+        t.list.field('disconnect', {type: "WidgetWhereUniqueInput"})
     },
 })
 
