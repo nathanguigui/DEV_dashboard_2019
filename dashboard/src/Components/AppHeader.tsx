@@ -1,9 +1,9 @@
 import React from 'react';
-import { AuthContext } from "./App";
+import { AuthContext } from "../App";
 import { Route, Redirect } from 'react-router-dom';
-import NavBar from "./Components/Bar/navBar";
-import SideBar from "./Components/Bar/sideBar";
-import AuthPage from "./Pages/authPage";
+import NavBar from "./Bar/navBar";
+import SideBar from "./Bar/sideBar";
+import AuthPage from "../Pages/authPage";
 
 // @ts-ignore
 function PrivateRoute({ children, ...rest }) {

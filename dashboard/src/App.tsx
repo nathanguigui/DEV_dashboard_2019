@@ -1,19 +1,11 @@
 import React, {Component} from 'react';
-import './App.css';
 import {HttpLink} from 'apollo-boost';
 import ApolloClient from "apollo-client";
 import {InMemoryCache, NormalizedCacheObject} from "apollo-cache-inmemory";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 import AuthPage from "./Pages/authPage";
 import {ApolloLink, FetchResult, NextLink, Operation} from 'apollo-link';
-import HomePage from "./Pages/homePage";
-import {PrivateRoute} from "./Components/Auth/privateRoute";
-import {AppHeader} from "./AppHeader";
+import {AppHeader} from "./Components/AppHeader";
 import { Observable } from 'apollo-client/util/Observable';
 
 
