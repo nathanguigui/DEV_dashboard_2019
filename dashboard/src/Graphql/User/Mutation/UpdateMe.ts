@@ -20,6 +20,8 @@ export const UPDATE_ME = gql`
             sidebarDisabled,
             googleToken,
             intraToken,
+            spotifyToken,
+            timezone
         }
     }
 `;

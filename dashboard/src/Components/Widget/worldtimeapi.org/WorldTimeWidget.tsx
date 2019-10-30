@@ -1,12 +1,20 @@
 import React, {ReactNode} from "react";
 import WorldTimeApi from "../../../Types/worldtimeapi.org/types";
-import moment from "moment";
+import momentTz from 'moment-timezone';
+import moment from 'moment';
 import DefaultWidget from "../DefaultWidget";
+import {GraphqlClient} from "../../../App";
+import {ME_PROFILE, MeQuerydata} from "../../../Graphql/User/Query/Me";
+import {UPDATE_ME, UpdateMeMutationData} from "../../../Graphql/User/Mutation/UpdateMe";
+import {UpdateMeInput} from "../../../Graphql/clientTypes";
+import LoadingFc from "../../miniComponent/loading";
 
 interface WorldTimeWidgetState {
     data: WorldTimeApi.Ip | null
     loading: boolean
     timezoneList: Array<string>
+    userTimezone: string
+    selectedTimezoneForm: string
 }
 
 class WorldTimeWidget extends  React.Component<Object, WorldTimeWidgetState> {
@@ -15,57 +23,89 @@ class WorldTimeWidget extends  React.Component<Object, WorldTimeWidgetState> {
         this.state = {
             data: null,
             loading: true,
-            timezoneList: []
+            timezoneList: [],
+            userTimezone: "",
+            selectedTimezoneForm: ""
         };
         this.updateMe = this.updateMe.bind(this);
         this.handleSettingsSubmit = this.handleSettingsSubmit.bind(this);
         this.handleSettingsChange = this.handleSettingsChange.bind(this);
+        this.loadSettingsData = this.loadSettingsData.bind(this);
+        this.triggerCornerClick = this.triggerCornerClick.bind(this);
         this.getContent = this.getContent.bind(this)
     }
 
     updateMe(): void {
-        fetch("http://worldtimeapi.org/api/ip").then((promise) => {
-            promise.json().then((dataIp) => {
-                this.setState({data: dataIp as WorldTimeApi.Ip})
+        if (this.state.userTimezone.length) {
+            fetch("http://worldtimeapi.org/api/timezone/" + this.state.selectedTimezoneForm).then((promise) => {
+                promise.json().then((dataIp) => {
+                    this.setState({data: dataIp as WorldTimeApi.Ip})
+                })
             })
-        })
+        } else {
+            fetch("http://worldtimeapi.org/api/ip").then((promise) => {
+                promise.json().then((dataIp) => {
+                    this.setState({data: dataIp as WorldTimeApi.Ip})
+                })
+            })
+        }
     }
 
     loadSettingsData(): void {
-        fetch("http://worldtimeapi.org/api/timezone").then((promise) => {
-            promise.json().then((timezones:Array<string>) => {
-                this.setState({timezoneList: timezones})
+        if (this.state.timezoneList.length === 0) {
+            fetch("http://worldtimeapi.org/api/timezone").then((promise) => {
+                promise.json().then((timezones:Array<string>) => {
+                    this.setState({timezoneList: timezones})
+                })
+            });
+            GraphqlClient.query<MeQuerydata>({query: ME_PROFILE}).then((res) => {
+                res.data.me && res.data.me.timezone && this.setState({userTimezone: res.data.me.timezone, loading: false, selectedTimezoneForm: res.data.me.timezone})
             })
-        })
+        }
+    }
+
+    triggerCornerClick(inSettings: boolean) {
+        this.loadSettingsData();
     }
 
     componentDidMount(): void {
-        this.updateMe();
         this.loadSettingsData();
+        this.updateMe();
     }
 
     getContent(): ReactNode {
         return (
             this.state.data && this.state.data.utc_datetime ?
-                <div>{moment.utc(this.state.data.utc_datetime).format("dddd, MMMM Do YYYY, h:mm:ss a")}</div> :
-                <div>Loading</div>
+                <div>
+                    Timezone: {this.state.userTimezone}<br/>
+                    {
+                        moment().day(this.state.data.day_of_week).format("dddd") + " " + this.state.data.datetime.split("T")[1].split(".")[0]
+
+                    }
+                </div> :
+                LoadingFc()
         )
     }
 
     handleSettingsSubmit(e: any) {
         e.preventDefault();
-        console.log("ok");
+
+        let tmp: UpdateMeInput = {};
+        tmp.timezone = this.state.selectedTimezoneForm;
+        GraphqlClient.mutate({mutation: UPDATE_ME, variables: {data: tmp}}).then((res) => {
+            this.setState({userTimezone: this.state.selectedTimezoneForm})
+        })
     }
 
     handleSettingsChange(e: any) {
-
+        e.target.name === "timezoneSelect" && (this.setState({selectedTimezoneForm: e.target.value}))
     }
 
     getSettings(): ReactNode {
         return (
             <form>
-                <select>
-                    <option style={{display: "none"}} selected value="" disabled>select timezone</option>
+                <select name="timezoneSelect" onChange={this.handleSettingsChange} value={this.state.selectedTimezoneForm}>
+                    <option style={{display: "none"}} value="" disabled>select timezone</option>
                     {this.state.timezoneList.map((timezone: string) => <option value={timezone}>{timezone}</option>)}
                 </select>
                 <button onClick={this.handleSettingsSubmit}>click me</button>
@@ -75,7 +115,10 @@ class WorldTimeWidget extends  React.Component<Object, WorldTimeWidgetState> {
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return (
-            <DefaultWidget updateContentFc={this.updateMe} content={this.getContent()} settings={this.getSettings()} widgetName={"WorldTimeWidget"}/>
+            <DefaultWidget
+                triggerCornerClick={this.triggerCornerClick} refreshRateSec={3} updateContentFc={this.updateMe}
+                content={this.getContent()} settings={this.getSettings()} widgetName={"WorldTimeWidget"}
+            />
         )
     }
 }

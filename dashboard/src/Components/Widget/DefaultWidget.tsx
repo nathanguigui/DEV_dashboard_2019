@@ -17,6 +17,8 @@ interface DefaultWidgetProps {
     content: ReactNode
     settings: ReactNode
     widgetName: string
+    refreshRateSec: number
+    triggerCornerClick: (inSettings: boolean) => void
 }
 
 class DefaultWidget extends  React.Component<DefaultWidgetProps, DefaultWidgetState> {
@@ -30,12 +32,13 @@ class DefaultWidget extends  React.Component<DefaultWidgetProps, DefaultWidgetSt
     }
 
     handleCornerClick(evt: any) {
+        this.props.triggerCornerClick(!this.state.inSettings);
         this.setState({inSettings: !this.state.inSettings})
     }
 
     componentDidMount(): void {
         this.props.updateContentFc();
-        this.timer = setInterval(this.props.updateContentFc, 5000);
+        this.timer = setInterval(this.props.updateContentFc, 1000 * this.props.refreshRateSec);
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {

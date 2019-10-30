@@ -19,6 +19,8 @@ export const ME_PROFILE = gql`
             sidebarDisabled
             googleToken
             intraToken
+            spotifyToken
+            timezone
         }
     }
 `;
