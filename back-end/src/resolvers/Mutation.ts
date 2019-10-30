@@ -3,8 +3,10 @@ import { hash, compare } from 'bcrypt'
 import { APP_SECRET, getUserId } from '../utils'
 import { sign } from 'jsonwebtoken'
 import { prisma } from '../generated/prisma-client';
+import {prismaObjectType} from "nexus-prisma";
 
-export const Mutation = mutationType({
+export const Mutation = prismaObjectType({
+  name: 'Mutation',
   definition(t) {
     t.field('signup', {
       type: 'AuthPayload',
@@ -54,6 +56,8 @@ export const Mutation = mutationType({
         }
       },
     });
+
+    t.prismaFields(["createWidget"]);
 
     t.field('updateMe', {
       type: 'User',

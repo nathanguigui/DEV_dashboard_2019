@@ -1,5 +1,13 @@
 import {inputObjectType, objectType} from "nexus";
 
+export const UpdateMeWidgetsInput = inputObjectType({
+    name: "UpdateMeWidgetsInput",
+    definition(t) {
+        t.list.field('connect', {type: "WidgetWhereUniqueInput" as any})
+        t.list.field('disconnect', {type: "WidgetWhereUniqueInput" as any})
+    },
+})
+
 export const UpdateMeInput = inputObjectType({
     name: 'UpdateMeInput',
     definition(t) {
@@ -13,6 +21,7 @@ export const UpdateMeInput = inputObjectType({
         t.boolean('sidebarDisabled'),
         t.string('phone'),
         t.string('spotifyToken'),
+        t.field('widgets', {type: "UpdateMeWidgetsInput" as any}),
         t.string('timezone')
     },
 });
