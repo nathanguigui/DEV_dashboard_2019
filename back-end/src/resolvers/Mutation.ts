@@ -1,7 +1,8 @@
-import { stringArg, idArg, mutationType } from 'nexus'
+import { stringArg, idArg, mutationType, arg } from 'nexus'
 import { hash, compare } from 'bcrypt'
 import { APP_SECRET, getUserId } from '../utils'
 import { sign } from 'jsonwebtoken'
+import { prisma } from '../generated/prisma-client';
 
 export const Mutation = mutationType({
   definition(t) {
@@ -31,7 +32,7 @@ export const Mutation = mutationType({
         }
       },
     })
-	
+
     t.field('login', {
       type: 'AuthPayload',
       args: {
@@ -51,7 +52,26 @@ export const Mutation = mutationType({
           token: sign({ userId: user.id }, APP_SECRET),
           User: user,
         }
-      },      
-    })
+      },
+    });
+
+    t.field('updateMe', {
+      type: 'User',
+      args: {
+        data: arg({type: "UpdateMeInput", required: true})
+      },
+      resolve: async (parent, {data}, context) => {
+        const userId: string = getUserId(context);
+        if (userId) {
+          const user = await prisma.updateUser({
+            data: data,
+            where: {
+              id: userId
+            }
+          });
+          return user;
+        }
+      }
+    });
   },
 })
