@@ -1,0 +1,294 @@
+type AggregateUser {
+  count: Int!
+}
+
+type AuthPayload {
+  token: String
+  User: User
+}
+
+type Mutation {
+  signup(
+    name: String!
+    surname: String!
+    email: String!
+    password: String!
+    address: String
+    phone: String!
+  ): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+  updateMe(data: UpdateMeInput!): User
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Query {
+  me: User
+  user(where: UserWhereUniqueInput!): User
+  users(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User!]!
+  usersConnection(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): UserConnection!
+}
+
+input UpdateMeInput {
+  email: String
+  surname: String
+  address: String
+  refreshTime: Int
+  backgroundImage: String
+  googleToken: String
+  intraToken: String
+  sidebarDisabled: Boolean
+  phone: String
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String!
+  surname: String!
+  address: String
+  phone: String!
+  type: UserType
+  refreshTime: Int
+  backgroundImage: String
+  sidebarDisabled: Boolean
+  googleToken: String
+  intraToken: String
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge!]!
+  aggregate: AggregateUser!
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
+  name_ASC
+  name_DESC
+  surname_ASC
+  surname_DESC
+  address_ASC
+  address_DESC
+  refreshTime_ASC
+  refreshTime_DESC
+  backgroundImage_ASC
+  backgroundImage_DESC
+  sidebarDisabled_ASC
+  sidebarDisabled_DESC
+  googleToken_ASC
+  googleToken_DESC
+  intraToken_ASC
+  intraToken_DESC
+  phone_ASC
+  phone_DESC
+  type_ASC
+  type_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+enum UserType {
+  ADMIN
+  USER
+}
+
+input UserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  surname: String
+  surname_not: String
+  surname_in: [String!]
+  surname_not_in: [String!]
+  surname_lt: String
+  surname_lte: String
+  surname_gt: String
+  surname_gte: String
+  surname_contains: String
+  surname_not_contains: String
+  surname_starts_with: String
+  surname_not_starts_with: String
+  surname_ends_with: String
+  surname_not_ends_with: String
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  refreshTime: Int
+  refreshTime_not: Int
+  refreshTime_in: [Int!]
+  refreshTime_not_in: [Int!]
+  refreshTime_lt: Int
+  refreshTime_lte: Int
+  refreshTime_gt: Int
+  refreshTime_gte: Int
+  backgroundImage: String
+  backgroundImage_not: String
+  backgroundImage_in: [String!]
+  backgroundImage_not_in: [String!]
+  backgroundImage_lt: String
+  backgroundImage_lte: String
+  backgroundImage_gt: String
+  backgroundImage_gte: String
+  backgroundImage_contains: String
+  backgroundImage_not_contains: String
+  backgroundImage_starts_with: String
+  backgroundImage_not_starts_with: String
+  backgroundImage_ends_with: String
+  backgroundImage_not_ends_with: String
+  sidebarDisabled: Boolean
+  sidebarDisabled_not: Boolean
+  googleToken: String
+  googleToken_not: String
+  googleToken_in: [String!]
+  googleToken_not_in: [String!]
+  googleToken_lt: String
+  googleToken_lte: String
+  googleToken_gt: String
+  googleToken_gte: String
+  googleToken_contains: String
+  googleToken_not_contains: String
+  googleToken_starts_with: String
+  googleToken_not_starts_with: String
+  googleToken_ends_with: String
+  googleToken_not_ends_with: String
+  intraToken: String
+  intraToken_not: String
+  intraToken_in: [String!]
+  intraToken_not_in: [String!]
+  intraToken_lt: String
+  intraToken_lte: String
+  intraToken_gt: String
+  intraToken_gte: String
+  intraToken_contains: String
+  intraToken_not_contains: String
+  intraToken_starts_with: String
+  intraToken_not_starts_with: String
+  intraToken_ends_with: String
+  intraToken_not_ends_with: String
+  phone: String
+  phone_not: String
+  phone_in: [String!]
+  phone_not_in: [String!]
+  phone_lt: String
+  phone_lte: String
+  phone_gt: String
+  phone_gte: String
+  phone_contains: String
+  phone_not_contains: String
+  phone_starts_with: String
+  phone_not_starts_with: String
+  phone_ends_with: String
+  phone_not_ends_with: String
+  type: UserType
+  type_not: UserType
+  type_in: [UserType!]
+  type_not_in: [UserType!]
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  email: String
+  phone: String
+}
+

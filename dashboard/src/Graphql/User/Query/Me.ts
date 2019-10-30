@@ -13,6 +13,12 @@ export const ME_PROFILE = gql`
             email
             address
             phone
+            type
+            refreshTime
+            backgroundImage
+            sidebarDisabled
+            googleToken
+            intraToken
         }
     }
 `;

@@ -7,6 +7,9 @@ import AuthPage from "./Pages/authPage";
 import {ApolloLink, FetchResult, NextLink, Operation} from 'apollo-link';
 import {AppHeader} from "./Components/AppHeader";
 import { Observable } from 'apollo-client/util/Observable';
+import {UPDATE_ME, UpdateMeMutationData} from "./Graphql/User/Mutation/UpdateMe";
+import {UpdateMeInput} from "./Graphql/clientTypes";
+import {ME_PROFILE, MeQuerydata} from "./Graphql/User/Query/Me";
 
 
 const request = (operation:Operation) => {
@@ -64,10 +67,31 @@ class App extends Component<object, AuthState> {
         super(props);
         this.state = InitialState;
         this.handleSidebarDisable = this.handleSidebarDisable.bind(this)
+        this.fetchInfos = this.fetchInfos.bind(this)
+    }
+
+    fetchInfos = () => {
+        GraphqlClient.query<MeQuerydata>({query: ME_PROFILE}).then((res) => {
+            if (res.data.me && typeof res.data.me.sidebarDisabled === "boolean")
+                this.setState({sidebarDisabled: res.data.me.sidebarDisabled})
+        })
+    };
+
+    componentDidMount(): void {
+        this.fetchInfos();
     }
 
     handleSidebarDisable = () => {
-        this.setState({sidebarDisabled: !this.state.sidebarDisabled})
+        let tmp: UpdateMeInput = {};
+        tmp.sidebarDisabled = !this.state.sidebarDisabled;
+        GraphqlClient.mutate({
+            mutation: UPDATE_ME,
+            variables: {
+                data: tmp
+            }
+        }).then((res:any) => {
+            this.setState({sidebarDisabled: !this.state.sidebarDisabled})
+        })
     };
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
