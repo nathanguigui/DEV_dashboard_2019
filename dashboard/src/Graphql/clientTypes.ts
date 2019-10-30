@@ -23,6 +23,7 @@ export type Mutation = {
   __typename?: 'Mutation',
   signup?: Maybe<AuthPayload>,
   login?: Maybe<AuthPayload>,
+  updateMe?: Maybe<User>,
 };
 
 
@@ -39,6 +40,11 @@ export type MutationSignupArgs = {
 export type MutationLoginArgs = {
   email: Scalars['String'],
   password: Scalars['String']
+};
+
+
+export type MutationUpdateMeArgs = {
+  data: UpdateMeInput
 };
 
 export type PageInfo = {
@@ -84,6 +90,18 @@ export type QueryUsersConnectionArgs = {
   last?: Maybe<Scalars['Int']>
 };
 
+export type UpdateMeInput = {
+  email?: Maybe<Scalars['String']>,
+  surname?: Maybe<Scalars['String']>,
+  address?: Maybe<Scalars['String']>,
+  refreshTime?: Maybe<Scalars['Int']>,
+  backgroundImage?: Maybe<Scalars['String']>,
+  googleToken?: Maybe<Scalars['String']>,
+  intraToken?: Maybe<Scalars['String']>,
+  sidebarDisabled?: Maybe<Scalars['Boolean']>,
+  phone?: Maybe<Scalars['String']>,
+};
+
 export type User = {
   __typename?: 'User',
   id: Scalars['ID'],
@@ -93,6 +111,11 @@ export type User = {
   address?: Maybe<Scalars['String']>,
   phone: Scalars['String'],
   type?: Maybe<UserType>,
+  refreshTime?: Maybe<Scalars['Int']>,
+  backgroundImage?: Maybe<Scalars['String']>,
+  sidebarDisabled?: Maybe<Scalars['Boolean']>,
+  googleToken?: Maybe<Scalars['String']>,
+  intraToken?: Maybe<Scalars['String']>,
 };
 
 export type UserConnection = {
@@ -121,6 +144,16 @@ export enum UserOrderByInput {
   SurnameDesc = 'surname_DESC',
   AddressAsc = 'address_ASC',
   AddressDesc = 'address_DESC',
+  RefreshTimeAsc = 'refreshTime_ASC',
+  RefreshTimeDesc = 'refreshTime_DESC',
+  BackgroundImageAsc = 'backgroundImage_ASC',
+  BackgroundImageDesc = 'backgroundImage_DESC',
+  SidebarDisabledAsc = 'sidebarDisabled_ASC',
+  SidebarDisabledDesc = 'sidebarDisabled_DESC',
+  GoogleTokenAsc = 'googleToken_ASC',
+  GoogleTokenDesc = 'googleToken_DESC',
+  IntraTokenAsc = 'intraToken_ASC',
+  IntraTokenDesc = 'intraToken_DESC',
   PhoneAsc = 'phone_ASC',
   PhoneDesc = 'phone_DESC',
   TypeAsc = 'type_ASC',
@@ -221,6 +254,58 @@ export type UserWhereInput = {
   address_not_starts_with?: Maybe<Scalars['String']>,
   address_ends_with?: Maybe<Scalars['String']>,
   address_not_ends_with?: Maybe<Scalars['String']>,
+  refreshTime?: Maybe<Scalars['Int']>,
+  refreshTime_not?: Maybe<Scalars['Int']>,
+  refreshTime_in?: Maybe<Array<Scalars['Int']>>,
+  refreshTime_not_in?: Maybe<Array<Scalars['Int']>>,
+  refreshTime_lt?: Maybe<Scalars['Int']>,
+  refreshTime_lte?: Maybe<Scalars['Int']>,
+  refreshTime_gt?: Maybe<Scalars['Int']>,
+  refreshTime_gte?: Maybe<Scalars['Int']>,
+  backgroundImage?: Maybe<Scalars['String']>,
+  backgroundImage_not?: Maybe<Scalars['String']>,
+  backgroundImage_in?: Maybe<Array<Scalars['String']>>,
+  backgroundImage_not_in?: Maybe<Array<Scalars['String']>>,
+  backgroundImage_lt?: Maybe<Scalars['String']>,
+  backgroundImage_lte?: Maybe<Scalars['String']>,
+  backgroundImage_gt?: Maybe<Scalars['String']>,
+  backgroundImage_gte?: Maybe<Scalars['String']>,
+  backgroundImage_contains?: Maybe<Scalars['String']>,
+  backgroundImage_not_contains?: Maybe<Scalars['String']>,
+  backgroundImage_starts_with?: Maybe<Scalars['String']>,
+  backgroundImage_not_starts_with?: Maybe<Scalars['String']>,
+  backgroundImage_ends_with?: Maybe<Scalars['String']>,
+  backgroundImage_not_ends_with?: Maybe<Scalars['String']>,
+  sidebarDisabled?: Maybe<Scalars['Boolean']>,
+  sidebarDisabled_not?: Maybe<Scalars['Boolean']>,
+  googleToken?: Maybe<Scalars['String']>,
+  googleToken_not?: Maybe<Scalars['String']>,
+  googleToken_in?: Maybe<Array<Scalars['String']>>,
+  googleToken_not_in?: Maybe<Array<Scalars['String']>>,
+  googleToken_lt?: Maybe<Scalars['String']>,
+  googleToken_lte?: Maybe<Scalars['String']>,
+  googleToken_gt?: Maybe<Scalars['String']>,
+  googleToken_gte?: Maybe<Scalars['String']>,
+  googleToken_contains?: Maybe<Scalars['String']>,
+  googleToken_not_contains?: Maybe<Scalars['String']>,
+  googleToken_starts_with?: Maybe<Scalars['String']>,
+  googleToken_not_starts_with?: Maybe<Scalars['String']>,
+  googleToken_ends_with?: Maybe<Scalars['String']>,
+  googleToken_not_ends_with?: Maybe<Scalars['String']>,
+  intraToken?: Maybe<Scalars['String']>,
+  intraToken_not?: Maybe<Scalars['String']>,
+  intraToken_in?: Maybe<Array<Scalars['String']>>,
+  intraToken_not_in?: Maybe<Array<Scalars['String']>>,
+  intraToken_lt?: Maybe<Scalars['String']>,
+  intraToken_lte?: Maybe<Scalars['String']>,
+  intraToken_gt?: Maybe<Scalars['String']>,
+  intraToken_gte?: Maybe<Scalars['String']>,
+  intraToken_contains?: Maybe<Scalars['String']>,
+  intraToken_not_contains?: Maybe<Scalars['String']>,
+  intraToken_starts_with?: Maybe<Scalars['String']>,
+  intraToken_not_starts_with?: Maybe<Scalars['String']>,
+  intraToken_ends_with?: Maybe<Scalars['String']>,
+  intraToken_not_ends_with?: Maybe<Scalars['String']>,
   phone?: Maybe<Scalars['String']>,
   phone_not?: Maybe<Scalars['String']>,
   phone_in?: Maybe<Array<Scalars['String']>>,
