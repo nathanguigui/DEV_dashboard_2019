@@ -32,7 +32,8 @@ export const permissions = shield(
     },
     Mutation: {
       updateMe: rules.isAuthenticatedUser,
-      createWidget: rules.isAuthenticatedUser
+      createWidget: rules.isAuthenticatedUser,
+      updateWidget: rules.isAuthenticatedUser
     },
   }
 )

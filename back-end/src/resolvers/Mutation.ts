@@ -57,7 +57,7 @@ export const Mutation = prismaObjectType({
       },
     });
 
-    t.prismaFields(["createWidget"]);
+    t.prismaFields(["createWidget", "updateWidget"]);
 
     t.field('updateMe', {
       type: 'User',
