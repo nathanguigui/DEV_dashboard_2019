@@ -3,6 +3,17 @@ enum UserType {
   USER
 }
 
+enum WidgetType {
+  WORLD_TIME
+}
+
+type Widget {
+  id: ID! @id
+  type: WidgetType!
+  settings: String!
+  title: String!
+}
+
 type User {
   id: ID! @id
   email: String! @unique
@@ -17,6 +28,7 @@ type User {
   intraToken: String
   spotifyToken: String
   timezone: String
+  widgets: [Widget]
   phone: String! @unique
   type: UserType @default(value: USER)
 }
