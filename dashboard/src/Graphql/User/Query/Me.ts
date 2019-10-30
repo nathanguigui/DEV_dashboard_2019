@@ -21,6 +21,12 @@ export const ME_PROFILE = gql`
             intraToken
             spotifyToken
             timezone
+            widgets {
+                id
+                settings
+                title
+                type
+            }
         }
     }
 `;

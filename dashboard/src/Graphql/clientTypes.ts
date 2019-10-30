@@ -13,6 +13,11 @@ export type AggregateUser = {
   count: Scalars['Int'],
 };
 
+export type AggregateWidget = {
+  __typename?: 'AggregateWidget',
+  count: Scalars['Int'],
+};
+
 export type AuthPayload = {
   __typename?: 'AuthPayload',
   token?: Maybe<Scalars['String']>,
@@ -23,6 +28,8 @@ export type Mutation = {
   __typename?: 'Mutation',
   signup?: Maybe<AuthPayload>,
   login?: Maybe<AuthPayload>,
+  createWidget: Widget,
+  updateWidget?: Maybe<Widget>,
   updateMe?: Maybe<User>,
 };
 
@@ -43,6 +50,17 @@ export type MutationLoginArgs = {
 };
 
 
+export type MutationCreateWidgetArgs = {
+  data: WidgetCreateInput
+};
+
+
+export type MutationUpdateWidgetArgs = {
+  data: WidgetUpdateInput,
+  where: WidgetWhereUniqueInput
+};
+
+
 export type MutationUpdateMeArgs = {
   data: UpdateMeInput
 };
@@ -58,9 +76,39 @@ export type PageInfo = {
 export type Query = {
   __typename?: 'Query',
   me?: Maybe<User>,
+  widget?: Maybe<Widget>,
+  widgets: Array<Widget>,
+  widgetsConnection: WidgetConnection,
   user?: Maybe<User>,
   users: Array<User>,
   usersConnection: UserConnection,
+};
+
+
+export type QueryWidgetArgs = {
+  where: WidgetWhereUniqueInput
+};
+
+
+export type QueryWidgetsArgs = {
+  where?: Maybe<WidgetWhereInput>,
+  orderBy?: Maybe<WidgetOrderByInput>,
+  skip?: Maybe<Scalars['Int']>,
+  after?: Maybe<Scalars['String']>,
+  before?: Maybe<Scalars['String']>,
+  first?: Maybe<Scalars['Int']>,
+  last?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryWidgetsConnectionArgs = {
+  where?: Maybe<WidgetWhereInput>,
+  orderBy?: Maybe<WidgetOrderByInput>,
+  skip?: Maybe<Scalars['Int']>,
+  after?: Maybe<Scalars['String']>,
+  before?: Maybe<Scalars['String']>,
+  first?: Maybe<Scalars['Int']>,
+  last?: Maybe<Scalars['Int']>
 };
 
 
@@ -101,7 +149,13 @@ export type UpdateMeInput = {
   sidebarDisabled?: Maybe<Scalars['Boolean']>,
   phone?: Maybe<Scalars['String']>,
   spotifyToken?: Maybe<Scalars['String']>,
+  widgets?: Maybe<UpdateMeWidgetsInput>,
   timezone?: Maybe<Scalars['String']>,
+};
+
+export type UpdateMeWidgetsInput = {
+  connect?: Maybe<Array<WidgetWhereUniqueInput>>,
+  disconnect?: Maybe<Array<WidgetWhereUniqueInput>>,
 };
 
 export type User = {
@@ -120,6 +174,18 @@ export type User = {
   intraToken?: Maybe<Scalars['String']>,
   spotifyToken?: Maybe<Scalars['String']>,
   timezone?: Maybe<Scalars['String']>,
+  widgets?: Maybe<Array<Widget>>,
+};
+
+
+export type UserWidgetsArgs = {
+  where?: Maybe<WidgetWhereInput>,
+  orderBy?: Maybe<WidgetOrderByInput>,
+  skip?: Maybe<Scalars['Int']>,
+  after?: Maybe<Scalars['String']>,
+  before?: Maybe<Scalars['String']>,
+  first?: Maybe<Scalars['Int']>,
+  last?: Maybe<Scalars['Int']>
 };
 
 export type UserConnection = {
@@ -342,6 +408,9 @@ export type UserWhereInput = {
   timezone_not_starts_with?: Maybe<Scalars['String']>,
   timezone_ends_with?: Maybe<Scalars['String']>,
   timezone_not_ends_with?: Maybe<Scalars['String']>,
+  widgets_every?: Maybe<WidgetWhereInput>,
+  widgets_some?: Maybe<WidgetWhereInput>,
+  widgets_none?: Maybe<WidgetWhereInput>,
   phone?: Maybe<Scalars['String']>,
   phone_not?: Maybe<Scalars['String']>,
   phone_in?: Maybe<Array<Scalars['String']>>,
@@ -369,4 +438,113 @@ export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['ID']>,
   email?: Maybe<Scalars['String']>,
   phone?: Maybe<Scalars['String']>,
+};
+
+export type Widget = {
+  __typename?: 'Widget',
+  id: Scalars['ID'],
+  type: WidgetType,
+  settings: Scalars['String'],
+  title: Scalars['String'],
+};
+
+export type WidgetConnection = {
+  __typename?: 'WidgetConnection',
+  pageInfo: PageInfo,
+  edges: Array<WidgetEdge>,
+  aggregate: AggregateWidget,
+};
+
+export type WidgetCreateInput = {
+  id?: Maybe<Scalars['ID']>,
+  type: WidgetType,
+  settings: Scalars['String'],
+  title: Scalars['String'],
+};
+
+export type WidgetEdge = {
+  __typename?: 'WidgetEdge',
+  node: Widget,
+  cursor: Scalars['String'],
+};
+
+export enum WidgetOrderByInput {
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC',
+  SettingsAsc = 'settings_ASC',
+  SettingsDesc = 'settings_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export enum WidgetType {
+  WorldTime = 'WORLD_TIME'
+}
+
+export type WidgetUpdateInput = {
+  type?: Maybe<WidgetType>,
+  settings?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+};
+
+export type WidgetWhereInput = {
+  id?: Maybe<Scalars['ID']>,
+  id_not?: Maybe<Scalars['ID']>,
+  id_in?: Maybe<Array<Scalars['ID']>>,
+  id_not_in?: Maybe<Array<Scalars['ID']>>,
+  id_lt?: Maybe<Scalars['ID']>,
+  id_lte?: Maybe<Scalars['ID']>,
+  id_gt?: Maybe<Scalars['ID']>,
+  id_gte?: Maybe<Scalars['ID']>,
+  id_contains?: Maybe<Scalars['ID']>,
+  id_not_contains?: Maybe<Scalars['ID']>,
+  id_starts_with?: Maybe<Scalars['ID']>,
+  id_not_starts_with?: Maybe<Scalars['ID']>,
+  id_ends_with?: Maybe<Scalars['ID']>,
+  id_not_ends_with?: Maybe<Scalars['ID']>,
+  type?: Maybe<WidgetType>,
+  type_not?: Maybe<WidgetType>,
+  type_in?: Maybe<Array<WidgetType>>,
+  type_not_in?: Maybe<Array<WidgetType>>,
+  settings?: Maybe<Scalars['String']>,
+  settings_not?: Maybe<Scalars['String']>,
+  settings_in?: Maybe<Array<Scalars['String']>>,
+  settings_not_in?: Maybe<Array<Scalars['String']>>,
+  settings_lt?: Maybe<Scalars['String']>,
+  settings_lte?: Maybe<Scalars['String']>,
+  settings_gt?: Maybe<Scalars['String']>,
+  settings_gte?: Maybe<Scalars['String']>,
+  settings_contains?: Maybe<Scalars['String']>,
+  settings_not_contains?: Maybe<Scalars['String']>,
+  settings_starts_with?: Maybe<Scalars['String']>,
+  settings_not_starts_with?: Maybe<Scalars['String']>,
+  settings_ends_with?: Maybe<Scalars['String']>,
+  settings_not_ends_with?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
+  title_not?: Maybe<Scalars['String']>,
+  title_in?: Maybe<Array<Scalars['String']>>,
+  title_not_in?: Maybe<Array<Scalars['String']>>,
+  title_lt?: Maybe<Scalars['String']>,
+  title_lte?: Maybe<Scalars['String']>,
+  title_gt?: Maybe<Scalars['String']>,
+  title_gte?: Maybe<Scalars['String']>,
+  title_contains?: Maybe<Scalars['String']>,
+  title_not_contains?: Maybe<Scalars['String']>,
+  title_starts_with?: Maybe<Scalars['String']>,
+  title_not_starts_with?: Maybe<Scalars['String']>,
+  title_ends_with?: Maybe<Scalars['String']>,
+  title_not_ends_with?: Maybe<Scalars['String']>,
+  AND?: Maybe<Array<WidgetWhereInput>>,
+  OR?: Maybe<Array<WidgetWhereInput>>,
+  NOT?: Maybe<Array<WidgetWhereInput>>,
+};
+
+export type WidgetWhereUniqueInput = {
+  id?: Maybe<Scalars['ID']>,
 };

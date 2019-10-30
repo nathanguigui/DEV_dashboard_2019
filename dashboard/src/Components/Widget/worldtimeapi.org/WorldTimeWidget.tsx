@@ -6,26 +6,42 @@ import DefaultWidget from "../DefaultWidget";
 import {GraphqlClient} from "../../../App";
 import {ME_PROFILE, MeQuerydata} from "../../../Graphql/User/Query/Me";
 import {UPDATE_ME, UpdateMeMutationData} from "../../../Graphql/User/Mutation/UpdateMe";
-import {UpdateMeInput} from "../../../Graphql/clientTypes";
+import {
+    MutationUpdateWidgetArgs,
+    UpdateMeInput,
+    UpdateMeWidgetsInput,
+    Widget,
+    WidgetUpdateInput
+} from "../../../Graphql/clientTypes";
 import LoadingFc from "../../miniComponent/loading";
+import {UPDATE_WIDGET_MUTATION, UpdateWidgetMutationData} from "../../../Graphql/Widget/Mutation/UpdateWidget";
+
+interface WorldTimeWidgetSettings {
+    timezone: string
+}
+
+interface WorldTimeWidgetProps {
+    widget: Widget
+}
 
 interface WorldTimeWidgetState {
     data: WorldTimeApi.Ip | null
     loading: boolean
     timezoneList: Array<string>
-    userTimezone: string
+    settings: WorldTimeWidgetSettings
     selectedTimezoneForm: string
 }
 
-class WorldTimeWidget extends  React.Component<Object, WorldTimeWidgetState> {
-    constructor(props:Object) {
+class WorldTimeWidget extends  React.Component<WorldTimeWidgetProps, WorldTimeWidgetState> {
+    constructor(props:WorldTimeWidgetProps) {
         super(props);
+        let settings: WorldTimeWidgetSettings = JSON.parse(props.widget.settings);
         this.state = {
             data: null,
             loading: true,
             timezoneList: [],
-            userTimezone: "",
-            selectedTimezoneForm: ""
+            settings: settings,
+            selectedTimezoneForm: settings.timezone
         };
         this.updateMe = this.updateMe.bind(this);
         this.handleSettingsSubmit = this.handleSettingsSubmit.bind(this);
@@ -36,7 +52,7 @@ class WorldTimeWidget extends  React.Component<Object, WorldTimeWidgetState> {
     }
 
     updateMe(): void {
-        if (this.state.userTimezone.length) {
+        if (this.state.settings.timezone.length) {
             fetch("http://worldtimeapi.org/api/timezone/" + this.state.selectedTimezoneForm).then((promise) => {
                 promise.json().then((dataIp) => {
                     this.setState({data: dataIp as WorldTimeApi.Ip})
@@ -58,9 +74,6 @@ class WorldTimeWidget extends  React.Component<Object, WorldTimeWidgetState> {
                     this.setState({timezoneList: timezones})
                 })
             });
-            GraphqlClient.query<MeQuerydata>({query: ME_PROFILE}).then((res) => {
-                res.data.me && res.data.me.timezone && this.setState({userTimezone: res.data.me.timezone, loading: false, selectedTimezoneForm: res.data.me.timezone})
-            })
         }
     }
 
@@ -77,7 +90,7 @@ class WorldTimeWidget extends  React.Component<Object, WorldTimeWidgetState> {
         return (
             this.state.data && this.state.data.utc_datetime ?
                 <div>
-                    Timezone: {this.state.userTimezone}<br/>
+                    Timezone: {this.state.settings.timezone}<br/>
                     {
                         moment().day(this.state.data.day_of_week).format("dddd") + " " + this.state.data.datetime.split("T")[1].split(".")[0]
 
@@ -90,10 +103,15 @@ class WorldTimeWidget extends  React.Component<Object, WorldTimeWidgetState> {
     handleSettingsSubmit(e: any) {
         e.preventDefault();
 
-        let tmp: UpdateMeInput = {};
-        tmp.timezone = this.state.selectedTimezoneForm;
-        GraphqlClient.mutate({mutation: UPDATE_ME, variables: {data: tmp}}).then((res) => {
-            this.setState({userTimezone: this.state.selectedTimezoneForm})
+        let tmp: WidgetUpdateInput = {};
+        tmp.title = this.props.widget.title;
+        this.state.settings.timezone = this.state.selectedTimezoneForm;
+        tmp.settings = JSON.stringify(this.state.settings);
+        GraphqlClient.mutate<UpdateWidgetMutationData, MutationUpdateWidgetArgs>({
+            mutation: UPDATE_WIDGET_MUTATION,
+            variables: {data: tmp, where: {id: this.props.widget.id}}
+        }).then((res) => {
+            this.setState({settings: {timezone: this.state.selectedTimezoneForm}})
         })
     }
 
@@ -117,7 +135,7 @@ class WorldTimeWidget extends  React.Component<Object, WorldTimeWidgetState> {
         return (
             <DefaultWidget
                 triggerCornerClick={this.triggerCornerClick} refreshRateSec={3} updateContentFc={this.updateMe}
-                content={this.getContent()} settings={this.getSettings()} widgetName={"WorldTimeWidget"}
+                content={this.getContent()} settings={this.getSettings()} widgetName={this.props.widget.title}
             />
         )
     }
