@@ -1,22 +1,26 @@
-import React from "react";
-import {defaultWidgetStyle} from "../../../Pages/homePage";
+import React, {ReactNode} from "react";
 import WorldTimeApi from "../../../Types/worldtimeapi.org/types";
 import moment from "moment";
+import DefaultWidget from "../DefaultWidget";
 
 interface WorldTimeWidgetState {
-    inSettings: boolean
     data: WorldTimeApi.Ip | null
+    loading: boolean
+    timezoneList: Array<string>
 }
 
 class WorldTimeWidget extends  React.Component<Object, WorldTimeWidgetState> {
-    private timer:any;
     constructor(props:Object) {
         super(props);
         this.state = {
-            inSettings: false,
-            data: null
+            data: null,
+            loading: true,
+            timezoneList: []
         };
-        this.updateMe = this.updateMe.bind(this)
+        this.updateMe = this.updateMe.bind(this);
+        this.handleSettingsSubmit = this.handleSettingsSubmit.bind(this);
+        this.handleSettingsChange = this.handleSettingsChange.bind(this);
+        this.getContent = this.getContent.bind(this)
     }
 
     updateMe(): void {
@@ -27,19 +31,51 @@ class WorldTimeWidget extends  React.Component<Object, WorldTimeWidgetState> {
         })
     }
 
+    loadSettingsData(): void {
+        fetch("http://worldtimeapi.org/api/timezone").then((promise) => {
+            promise.json().then((timezones:Array<string>) => {
+                this.setState({timezoneList: timezones})
+            })
+        })
+    }
+
     componentDidMount(): void {
         this.updateMe();
-        this.timer = setInterval(this.updateMe, 5000);
+        this.loadSettingsData();
+    }
+
+    getContent(): ReactNode {
+        return (
+            this.state.data && this.state.data.utc_datetime ?
+                <div>{moment.utc(this.state.data.utc_datetime).format("dddd, MMMM Do YYYY, h:mm:ss a")}</div> :
+                <div>Loading</div>
+        )
+    }
+
+    handleSettingsSubmit(e: any) {
+        e.preventDefault();
+        console.log("ok");
+    }
+
+    handleSettingsChange(e: any) {
+
+    }
+
+    getSettings(): ReactNode {
+        return (
+            <form>
+                <select>
+                    <option style={{display: "none"}} selected value="" disabled>select timezone</option>
+                    {this.state.timezoneList.map((timezone: string) => <option value={timezone}>{timezone}</option>)}
+                </select>
+                <button onClick={this.handleSettingsSubmit}>click me</button>
+            </form>
+        )
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return (
-            <div style={defaultWidgetStyle}>
-                {this.state.data && this.state.data.utc_datetime ?
-
-                    <p>{moment.utc(this.state.data.utc_datetime).format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>:<p>Loading</p>
-                }
-            </div>
+            <DefaultWidget updateContentFc={this.updateMe} content={this.getContent()} settings={this.getSettings()} widgetName={"WorldTimeWidget"}/>
         )
     }
 }
