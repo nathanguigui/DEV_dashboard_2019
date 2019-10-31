@@ -12,6 +12,7 @@ type Widget {
   type: WidgetType!
   settings: String!
   title: String!
+  order: Number!
 }
 
 type User {
