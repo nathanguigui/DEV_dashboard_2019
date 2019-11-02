@@ -1,10 +1,10 @@
 
 const AppColors = {
-    darkPrimaryColor: "#7B1FA2",
-    lightPrimaryColor: "#E1BEE7",
-    primaryColor: "#9C27B0",
+    darkPrimaryColor: "#A7A7A7",
+    lightPrimaryColor: "#fafafa",
+    primaryColor: "#C7C7C7",
     textAndIcons: "#FFFFFF",
-    accentColor: "#4CAF50",
+    accentColor: "#03A9F4",
     primaryText: "#212121",
     secondaryText: "#757575",
     dividerColor: "#BDBDBD"

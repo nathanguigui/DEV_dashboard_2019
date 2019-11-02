@@ -376,6 +376,7 @@ type Widget {
   type: WidgetType!
   settings: String!
   title: String!
+  order: Int!
 }
 
 type WidgetConnection {
@@ -389,6 +390,7 @@ input WidgetCreateInput {
   type: WidgetType!
   settings: String!
   title: String!
+  order: Int!
 }
 
 type WidgetEdge {
@@ -405,6 +407,8 @@ enum WidgetOrderByInput {
   settings_DESC
   title_ASC
   title_DESC
+  order_ASC
+  order_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -419,6 +423,7 @@ input WidgetUpdateInput {
   type: WidgetType
   settings: String
   title: String
+  order: Int
 }
 
 input WidgetWhereInput {
@@ -468,6 +473,14 @@ input WidgetWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  order: Int
+  order_not: Int
+  order_in: [Int!]
+  order_not_in: [Int!]
+  order_lt: Int
+  order_lte: Int
+  order_gt: Int
+  order_gte: Int
   AND: [WidgetWhereInput!]
   OR: [WidgetWhereInput!]
   NOT: [WidgetWhereInput!]

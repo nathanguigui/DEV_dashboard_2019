@@ -3,7 +3,9 @@ import WorldTimeWidget from "../Components/Widget/worldtimeapi.org/WorldTimeWidg
 import LoadingFc from "../Components/miniComponent/loading";
 import {GraphqlClient} from "../App";
 import {ME_PROFILE, MeQuerydata} from "../Graphql/User/Query/Me";
-import {Widget, WidgetType} from "../Graphql/clientTypes";
+import {Widget, WidgetType, WidgetUpdateInput} from "../Graphql/clientTypes";
+import {UPDATE_ME} from "../Graphql/User/Mutation/UpdateMe";
+import {UPDATE_WIDGET_MUTATION} from "../Graphql/Widget/Mutation/UpdateWidget";
 
 interface HomePageState {
     loading: boolean
@@ -17,7 +19,94 @@ class HomePage extends Component<Object, HomePageState> {
         this.state = {
             loading: true,
             data: null
+        };
+        this.handleMoveLeftWidget = this.handleMoveLeftWidget.bind(this);
+        this.handleMoveRightWidget = this.handleMoveRightWidget.bind(this);
+        this.handleRemoveWidget = this.handleRemoveWidget.bind(this);
+        this.removeProfileWidget = this.removeProfileWidget.bind(this);
+    }
+
+    removeProfileWidget(widget: Widget, newWidget: any): void {
+        GraphqlClient.mutate({mutation: UPDATE_ME, variables: {data: {
+            widgets: {disconnect: {id: widget.id}}
+        }}}).then((res) => {
+            if (this.state.data && this.state.data.me && this.state.data.me.widgets) {
+                let tmp = this.state.data;
+                // @ts-ignore
+                tmp.me.widgets = newWidget;
+                this.setState({data: tmp})
+            }
+        })
+    }
+
+    handleRemoveWidget(widget: Widget): void {
+        if (this.state.data && this.state.data.me && this.state.data.me.widgets) {
+            let newWidget:Array<Widget> = [];
+            this.state.data.me.widgets.forEach((wdg: Widget) => {
+                widget.id !== wdg.id && newWidget.push(wdg)
+            });
+            this.removeProfileWidget(widget, newWidget);
         }
+    }
+
+    async handleMoveLeftWidget(widget: Widget) : Promise<boolean> {
+        let oldState = this.state;
+        if (oldState.data && oldState.data.me && oldState.data.me.widgets) {
+            let leftWidget: Widget | undefined = undefined;
+            for (let i = 0; i < oldState.data.me.widgets.length; i++) {
+                if (oldState.data.me.widgets[i].order === widget.order - 1) {
+                    leftWidget = oldState.data.me.widgets[i];
+                    break;
+                }
+            }
+
+            console.log(leftWidget);
+            if (typeof leftWidget === typeof widget) {
+                // @ts-ignore
+                const newSelectedWidgetData: WidgetUpdateInput = {order: leftWidget.order};
+                const newLeftWidgetData: WidgetUpdateInput = {order: widget.order};
+                const data = await GraphqlClient.mutate({mutation: UPDATE_WIDGET_MUTATION, variables: {data: newSelectedWidgetData, where: {id: widget.id}}});
+                if (data.errors)
+                    return false;
+                // @ts-ignore
+                await GraphqlClient.mutate({mutation: UPDATE_WIDGET_MUTATION, variables: {data: newLeftWidgetData, where: {id: leftWidget.id}}});
+                // TODO update state instead of reload
+                window.location.reload();
+                return true
+            }
+            return false
+        }
+        return false
+    }
+
+    async handleMoveRightWidget(widget: Widget): Promise<boolean> {
+        let oldState = this.state;
+        if (oldState.data && oldState.data.me && oldState.data.me.widgets) {
+            let rightWidget: Widget | undefined = undefined;
+            for (let i = 0; i < oldState.data.me.widgets.length; i++) {
+                if (oldState.data.me.widgets[i].order === widget.order + 1) {
+                    rightWidget = oldState.data.me.widgets[i];
+                    break;
+                }
+            }
+
+            console.log(rightWidget);
+            if (typeof rightWidget === typeof widget) {
+                // @ts-ignore
+                const newSelectedWidgetData: WidgetUpdateInput = {order: rightWidget.order};
+                const newRightWidgetData: WidgetUpdateInput = {order: widget.order};
+                const data = await GraphqlClient.mutate({mutation: UPDATE_WIDGET_MUTATION, variables: {data: newSelectedWidgetData, where: {id: widget.id}}});
+                if (data.errors)
+                    return false;
+                // @ts-ignore
+                await GraphqlClient.mutate({mutation: UPDATE_WIDGET_MUTATION, variables: {data: newRightWidgetData, where: {id: rightWidget.id}}});
+                // TODO update state instead of reload
+                window.location.reload();
+                return true
+            }
+            return false
+        }
+        return false
     }
 
     componentDidMount(): void {
@@ -29,7 +118,7 @@ class HomePage extends Component<Object, HomePageState> {
     getWidget(widget: Widget): ReactNode {
         switch (widget.type) {
             case WidgetType.WorldTime:
-                return <WorldTimeWidget widget={widget}/>
+                return <WorldTimeWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
         }
     }
 
@@ -79,10 +168,15 @@ export const defaultWidgetHeaderStyle: CSSProperties = {
 };
 
 export const defaultWidgetCornerStyle: CSSProperties = {
-    alignSelf: "flex-end",
     marginTop: "3px",
     marginRight: "3px",
     width: "20px"
 };
+
+export const defaultWidgetNavbarStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between"
+}
 
 export default HomePage;

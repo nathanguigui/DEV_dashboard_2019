@@ -26,6 +26,7 @@ export const ME_PROFILE = gql`
                 settings
                 title
                 type
+                order
             }
         }
     }

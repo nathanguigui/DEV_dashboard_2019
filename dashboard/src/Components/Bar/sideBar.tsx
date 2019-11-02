@@ -40,7 +40,7 @@ class SideBar extends React.Component<SideBarProps, SideBarState> {
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
             <div style={containerStyle} className="containAllContent">
-                <div style={!this.props.sidebarDisabled ? sidebarStyle : {...sidebarStyle, flexGrow: 0}} className="sidebar">
+                <div style={!this.props.sidebarDisabled ? sidebarStyle : {...sidebarStyle, width: "0%"}} className="sidebar">
                     {!this.props.sidebarDisabled ?
                         this.state.loading ?
                             LoadingFc():
@@ -48,9 +48,8 @@ class SideBar extends React.Component<SideBarProps, SideBarState> {
 
                     }
                 </div>
-                <div style={contentStyle} className="content">
+                <div style={!this.props.sidebarDisabled ? contentStyle : {...containerStyle, width: "100%"}} className="content">
                     <PrivateRoute path="/" exact component={HomePage}/>
-                    <PrivateRoute path="/toto" exact component={HomePage}/>
                 </div>
             </div>
         )
@@ -67,8 +66,9 @@ const containerStyle : CSSProperties = {
 
 const sidebarStyle : CSSProperties = {
     flexGrow: 2,
-    backgroundColor: AppColors.lightPrimaryColor,
-    transition: "all .25s linear"
+    backgroundColor: AppColors.primaryColor,
+    transition: "all .25s linear",
+    width: "12%"
 };
 
 const sidebarContentStyle : CSSProperties = {
@@ -77,7 +77,8 @@ const sidebarContentStyle : CSSProperties = {
 }
 
 const contentStyle : CSSProperties = {
-    flexGrow: 10
+    flexGrow: 10,
+    backgroundColor: AppColors.lightPrimaryColor
 };
 
 export default SideBar;

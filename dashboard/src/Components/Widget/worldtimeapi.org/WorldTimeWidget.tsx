@@ -22,6 +22,9 @@ interface WorldTimeWidgetSettings {
 
 interface WorldTimeWidgetProps {
     widget: Widget
+    moveLeft: (widget:Widget) => Promise<boolean>
+    moveRight: (widget:Widget) => Promise<boolean>
+    remove: (widget:Widget) => void
 }
 
 interface WorldTimeWidgetState {
@@ -134,8 +137,9 @@ class WorldTimeWidget extends  React.Component<WorldTimeWidgetProps, WorldTimeWi
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return (
             <DefaultWidget
-                triggerCornerClick={this.triggerCornerClick} refreshRateSec={3} updateContentFc={this.updateMe}
-                content={this.getContent()} settings={this.getSettings()} widgetName={this.props.widget.title}
+                triggerCornerClick={this.triggerCornerClick} refreshRateSec={300} updateContentFc={this.updateMe}
+                content={this.getContent()} settings={this.getSettings()} widget={this.props.widget}
+                moveLeft={this.props.moveLeft} moveRight={this.props.moveRight} remove={this.props.remove}
             />
         )
     }

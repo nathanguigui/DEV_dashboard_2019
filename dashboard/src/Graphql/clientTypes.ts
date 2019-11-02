@@ -446,6 +446,7 @@ export type Widget = {
   type: WidgetType,
   settings: Scalars['String'],
   title: Scalars['String'],
+  order: Scalars['Int'],
 };
 
 export type WidgetConnection = {
@@ -460,6 +461,7 @@ export type WidgetCreateInput = {
   type: WidgetType,
   settings: Scalars['String'],
   title: Scalars['String'],
+  order: Scalars['Int'],
 };
 
 export type WidgetEdge = {
@@ -477,6 +479,8 @@ export enum WidgetOrderByInput {
   SettingsDesc = 'settings_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
+  OrderAsc = 'order_ASC',
+  OrderDesc = 'order_DESC',
   CreatedAtAsc = 'createdAt_ASC',
   CreatedAtDesc = 'createdAt_DESC',
   UpdatedAtAsc = 'updatedAt_ASC',
@@ -491,6 +495,7 @@ export type WidgetUpdateInput = {
   type?: Maybe<WidgetType>,
   settings?: Maybe<Scalars['String']>,
   title?: Maybe<Scalars['String']>,
+  order?: Maybe<Scalars['Int']>,
 };
 
 export type WidgetWhereInput = {
@@ -540,6 +545,14 @@ export type WidgetWhereInput = {
   title_not_starts_with?: Maybe<Scalars['String']>,
   title_ends_with?: Maybe<Scalars['String']>,
   title_not_ends_with?: Maybe<Scalars['String']>,
+  order?: Maybe<Scalars['Int']>,
+  order_not?: Maybe<Scalars['Int']>,
+  order_in?: Maybe<Array<Scalars['Int']>>,
+  order_not_in?: Maybe<Array<Scalars['Int']>>,
+  order_lt?: Maybe<Scalars['Int']>,
+  order_lte?: Maybe<Scalars['Int']>,
+  order_gt?: Maybe<Scalars['Int']>,
+  order_gte?: Maybe<Scalars['Int']>,
   AND?: Maybe<Array<WidgetWhereInput>>,
   OR?: Maybe<Array<WidgetWhereInput>>,
   NOT?: Maybe<Array<WidgetWhereInput>>,

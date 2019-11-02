@@ -12,6 +12,7 @@ export const UPDATE_WIDGET_MUTATION = gql`
             type
             settings
             title
+            order
         }
     }
 `;
