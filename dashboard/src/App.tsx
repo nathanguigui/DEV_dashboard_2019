@@ -11,7 +11,6 @@ import {UPDATE_ME, UpdateMeMutationData} from "./Graphql/User/Mutation/UpdateMe"
 import {UpdateMeInput} from "./Graphql/clientTypes";
 import {ME_PROFILE, MeQuerydata} from "./Graphql/User/Query/Me";
 
-
 const request = (operation:Operation) => {
     let token = localStorage.getItem('token');
     operation.setContext({

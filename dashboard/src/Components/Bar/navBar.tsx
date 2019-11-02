@@ -74,7 +74,7 @@ class NavBar extends React.Component<NavBarProps> {
 const containerStyle: CSSProperties = {
     display: "flex",
     flexDirection: "row",
-    backgroundColor: AppColors.darkPrimaryColor,
+    backgroundColor: AppColors.primaryColor,
     color: AppColors.textAndIcons
 };
 

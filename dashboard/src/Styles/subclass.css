@@ -1,12 +1,21 @@
 .styled-button:hover {
-    background-color: #7b7b7b!important;
+    background-color: #34438d !important;
 }
 
 .styled-button:active {
-    background-color: #333333 !important;
+    background-color: #212e6e !important;
 }
 
 .styled-button {
     cursor: pointer;
+    transition: all ease-in-out 0.25s;
+}
+
+.styled-icons:hover {
+    color: whitesmoke;
+}
+
+.styled-icons {
+    color: black;
     transition: all ease-in-out 0.25s;
 }

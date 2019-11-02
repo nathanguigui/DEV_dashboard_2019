@@ -1,8 +1,11 @@
-import React, {ReactNode} from "react";
+import React, {CSSProperties, ReactNode} from "react";
 import {
     defaultWidgetContentStyle,
     defaultWidgetCornerStyle,
-    defaultWidgetHeaderStyle, defaultWidgetNavbarStyle,
+    defaultWidgetHeaderStyle,
+    defaultWidgetNavbarButtonsStyle,
+    defaultWidgetNavbarSingleButton,
+    defaultWidgetNavbarStyle,
     defaultWidgetStyle
 } from "../../Pages/homePage";
 import Times from "../../Assets/times-solid.svg"
@@ -11,6 +14,8 @@ import Left from "../../Assets/caret-left-solid.svg"
 import Right from "../../Assets/caret-right-solid.svg"
 import Trash from "../../Assets/trash-alt-solid.svg"
 import {Widget} from "../../Graphql/clientTypes";
+import "../../Styles/subclass.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface DefaultWidgetState {
     inSettings: boolean
@@ -67,10 +72,20 @@ class DefaultWidget extends  React.Component<DefaultWidgetProps, DefaultWidgetSt
         return (
             <div className="widget" style={{...defaultWidgetStyle, order: this.props.widget.order}}>
                 <div style={defaultWidgetNavbarStyle}>
-                    <div style={{height: "20px", width: "20px"}}><img style={{height: "100%"}} onClick={this.handleRemove} src={Trash} alt={"trash"}/></div>
-                    {this.props.widget.order !== 1 && <div style={{height: "20px", width: "20px"}}><img style={{height: "100%"}} onClick={this.handleLeftSide} src={Left} alt={"left"}/></div>}
-                    {<div style={{height: "20px", width: "20px"}}><img style={{height: "100%"}} onClick={this.handleRightSide} src={Right} alt={"right"}/></div>}
-                    <div style={{height: "20px", width: "20px"}}><img style={{height: "100%"}} onClick={this.handleCornerClick} src={this.state.inSettings ? Times : Wrench} alt={"settings"}/></div>
+                    <div className="styled-button" role="button" onClick={this.handleRemove} style={{...defaultWidgetNavbarSingleButton, borderTopLeftRadius: "5px", borderLeft: "none!important", borderRight: "solid"}}>
+                        <i style={IconStyle} className="fas styled-icons fa-trash-alt"/>
+                    </div>
+                    <div style={defaultWidgetNavbarButtonsStyle}>
+                        {this.props.widget.order !== 1 && <div className="styled-button" role="button" onClick={this.handleLeftSide} style={defaultWidgetNavbarSingleButton}>
+                          <i style={IconStyle} className="fas styled-icons fa-caret-left"/>
+                        </div>}
+                        {<div className="styled-button" role="button" onClick={this.handleRightSide} style={defaultWidgetNavbarSingleButton}>
+                            <i style={IconStyle} className="fas styled-icons fa-caret-right"/>
+                        </div>}
+                        <div className="styled-button" role="button" onClick={this.handleCornerClick} style={{...defaultWidgetNavbarSingleButton, borderTopRightRadius: "5px"}}>
+                            <i style={IconStyle} className="fas styled-icons fa-tools"/>
+                        </div>
+                    </div>
                 </div>
                 <div style={defaultWidgetHeaderStyle}>
                     <h2 style={{marginTop: 0}}>{this.props.widget.title}</h2>
@@ -87,5 +102,13 @@ class DefaultWidget extends  React.Component<DefaultWidgetProps, DefaultWidgetSt
         )
     }
 }
+
+const IconStyle: CSSProperties = {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+};
 
 export default DefaultWidget;

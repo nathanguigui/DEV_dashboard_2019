@@ -48,7 +48,7 @@ class SideBar extends React.Component<SideBarProps, SideBarState> {
 
                     }
                 </div>
-                <div style={!this.props.sidebarDisabled ? contentStyle : {...containerStyle, width: "100%"}} className="content">
+                <div style={!this.props.sidebarDisabled ? {...contentStyle, paddingLeft: "30px", paddingRight: "10px"} : {...contentStyle, width: "100%"}} className="content">
                     <PrivateRoute path="/" exact component={HomePage}/>
                 </div>
             </div>
@@ -65,8 +65,7 @@ const containerStyle : CSSProperties = {
 };
 
 const sidebarStyle : CSSProperties = {
-    flexGrow: 2,
-    backgroundColor: AppColors.primaryColor,
+    backgroundColor: AppColors.textAndIcons,
     transition: "all .25s linear",
     width: "12%"
 };
@@ -78,7 +77,8 @@ const sidebarContentStyle : CSSProperties = {
 
 const contentStyle : CSSProperties = {
     flexGrow: 10,
-    backgroundColor: AppColors.lightPrimaryColor
+    backgroundColor: AppColors.dividerColor,
+    transition: "all ease-in-out 0.25s"
 };
 
 export default SideBar;

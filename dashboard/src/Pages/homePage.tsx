@@ -6,6 +6,7 @@ import {ME_PROFILE, MeQuerydata} from "../Graphql/User/Query/Me";
 import {Widget, WidgetType, WidgetUpdateInput} from "../Graphql/clientTypes";
 import {UPDATE_ME} from "../Graphql/User/Mutation/UpdateMe";
 import {UPDATE_WIDGET_MUTATION} from "../Graphql/Widget/Mutation/UpdateWidget";
+import AppColors from "../Styles/AppColors";
 
 interface HomePageState {
     loading: boolean
@@ -145,7 +146,7 @@ const dashboardContainer: CSSProperties = {
 export const defaultWidgetStyle: CSSProperties = {
     display: "flex",
     flexGrow: 1,
-    backgroundColor: "grey",
+    backgroundColor: AppColors.textAndIcons,
     margin: "5px",
     borderRadius: "5px",
     flexDirection: "column",
@@ -176,7 +177,30 @@ export const defaultWidgetCornerStyle: CSSProperties = {
 export const defaultWidgetNavbarStyle: CSSProperties = {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between"
-}
+    justifyContent: "space-between",
+    width: "100%",
+    alignItems: "center",
+    height: "40px",
+};
+
+export const defaultWidgetNavbarButtonsStyle: CSSProperties = {
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    height: "100%",
+};
+
+export const defaultWidgetNavbarSingleButton: CSSProperties = {
+    backgroundColor: 'rgba(0,0,0,0)',
+    height : '100%',
+    display : 'flex',
+    justifyContent: 'center',
+    alignItems : 'center',
+    color : AppColors.lightPrimaryColor,
+    fontWeight : 'bold',
+    borderLeft : 'solid',
+    minWidth: "25px",
+    borderBottom: 'solid',
+};
 
 export default HomePage;
