@@ -15,7 +15,6 @@ import Right from "../../Assets/caret-right-solid.svg"
 import Trash from "../../Assets/trash-alt-solid.svg"
 import {Widget} from "../../Graphql/clientTypes";
 import "../../Styles/subclass.css"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface DefaultWidgetState {
     inSettings: boolean
