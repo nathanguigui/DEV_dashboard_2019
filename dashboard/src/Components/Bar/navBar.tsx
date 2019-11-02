@@ -22,10 +22,18 @@ interface NavBarProps {
     sidebarDisabled: boolean
 }
 
-class NavBar extends React.Component<NavBarProps> {
+interface NavBarState {
+    addPanelOpened: boolean
+}
+
+class NavBar extends React.Component<NavBarProps, NavBarState> {
 
     constructor(props:any) {
         super(props);
+        this.state = {
+            addPanelOpened: false
+        }
+        this.addCustomWidget = this.addCustomWidget.bind(this);
         this.handleAddWidget = this.handleAddWidget.bind(this);
     }
 
@@ -35,6 +43,10 @@ class NavBar extends React.Component<NavBarProps> {
     }
 
     handleAddWidget() {
+        this.setState({addPanelOpened: !this.state.addPanelOpened})
+    }
+
+    addCustomWidget() {
         let tmp:WidgetCreateInput = {settings: '{"timezone": "Asia/Gaza"}', title: "Test unnamed", type: WidgetType.WorldTime, order: 2};
         GraphqlClient.mutate({
             mutation: ADD_WIDGET_MUTATION,
@@ -62,8 +74,12 @@ class NavBar extends React.Component<NavBarProps> {
                         <img style={{width: "75%", margin: "5px"}} className={this.props.sidebarDisabled ? "rotate-90-ccw" : "rotate-90-cw"} onClick={this.props.disableSidebar} src={Bars}/>
                     </div>
                     <div style={{display : 'flex', justifyContent: 'center', alignItems : 'center', height : '100%' }}>
-                        <div className="styled-button" role="button" style={{ backgroundColor: 'rgba(0,0,0,0)', height : '100%', display : 'flex', justifyContent: 'center', alignItems : 'center', color : 'white',  fontWeight : 'bold', borderLeft : 'solid', padding : 20}} onClick={this.handleAddWidget}>Add</div>
-                        <div className="styled-button" role="button" style={{ backgroundColor: 'rgba(0,0,0,0)', height : '100%', display : 'flex', justifyContent: 'center', alignItems : 'center', color : 'white', fontWeight : 'bold', borderLeft : 'solid', padding : 20}} onClick={this.handleDisconnect}>Disconnect</div>
+                            <div style={{...addWidgetMenuStyle, height: this.state.addPanelOpened ? "200px" : 0}}>panel</div>
+                        <div className="styled-button" role="button" style={navbarIconStyle} onClick={this.handleAddWidget}>
+                            <div style={{...addWidgetMenuTriangleStyle, fontSize: this.state.addPanelOpened ? "24px" : "0"}}>▲</div>
+                            Add
+                        </div>
+                        <div className="styled-button" role="button" style={navbarIconStyle} onClick={this.handleDisconnect}>Disconnect</div>
                     </div>
                 </div>
             </div>
@@ -86,6 +102,39 @@ const itemSeparator: CSSProperties = {
     alignItems: "center",
     marginLeft: "5px",
     marginRight: "5px"
+};
+
+const navbarIconStyle: CSSProperties = {
+    backgroundColor: 'rgba(0,0,0,0)',
+    height : '100%',
+    display : 'flex',
+    justifyContent: 'center',
+    alignItems : 'center',
+    color : 'white',
+    fontWeight : 'bold',
+    borderLeft : 'solid',
+    padding : 20
+};
+
+const addWidgetMenuTriangleStyle: CSSProperties = {
+    position: "absolute",
+    top: "50px",
+    zIndex: 1234,
+    color: "black",
+    fontSize: "24px",
+    transition: "all .5s"
+};
+
+const addWidgetMenuStyle: CSSProperties = {
+    position: "absolute",
+    top: "74px",
+    zIndex: 12345,
+    height: "200px",
+    width: "25vmax",
+    right: "20px",
+    backgroundColor: "black",
+    borderRadius: "10px",
+    transition: "all .5s"
 };
 
 export default NavBar;
