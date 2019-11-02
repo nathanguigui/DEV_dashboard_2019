@@ -16,23 +16,19 @@ import {
 import {ADD_WIDGET_MUTATION} from "../../Graphql/Widget/Mutation/AddWidget";
 import {UPDATE_ME} from "../../Graphql/User/Mutation/UpdateMe";
 import "../../Styles/subclass.css"
+import WidgetListMenu from "../Menu/widgetListMenu";
 
 interface NavBarProps {
     disableSidebar: () => void
     sidebarDisabled: boolean
+    switchWidgetMenu: (val: boolean) => void
+    widgetMenuOpened: boolean
 }
 
-interface NavBarState {
-    addPanelOpened: boolean
-}
-
-class NavBar extends React.Component<NavBarProps, NavBarState> {
+class NavBar extends React.Component<NavBarProps> {
 
     constructor(props:any) {
         super(props);
-        this.state = {
-            addPanelOpened: false
-        }
         this.addCustomWidget = this.addCustomWidget.bind(this);
         this.handleAddWidget = this.handleAddWidget.bind(this);
     }
@@ -43,7 +39,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
     }
 
     handleAddWidget() {
-        this.setState({addPanelOpened: !this.state.addPanelOpened})
+        this.props.switchWidgetMenu(!this.props.widgetMenuOpened);
     }
 
     addCustomWidget() {
@@ -74,9 +70,16 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
                         <img style={{width: "75%", margin: "5px"}} className={this.props.sidebarDisabled ? "rotate-90-ccw" : "rotate-90-cw"} onClick={this.props.disableSidebar} src={Bars}/>
                     </div>
                     <div style={{display : 'flex', justifyContent: 'center', alignItems : 'center', height : '100%' }}>
-                            <div style={{...addWidgetMenuStyle, height: this.state.addPanelOpened ? "200px" : 0}}>panel</div>
+                        {this.props.widgetMenuOpened ?
+                            <div className="widget-menu" style={{...addWidgetMenuStyle, ...addWidgetMenuStyleDisabled, height: "200px"}}>
+                                {this.props.widgetMenuOpened && <WidgetListMenu/>}
+                            </div> :
+                            <div className="widget-menu" style={{...addWidgetMenuStyle, height: 0}}>
+                                {this.props.widgetMenuOpened && <WidgetListMenu/>}
+                            </div>
+                        }
                         <div className="styled-button" role="button" style={navbarIconStyle} onClick={this.handleAddWidget}>
-                            <div style={{...addWidgetMenuTriangleStyle, fontSize: this.state.addPanelOpened ? "24px" : "0"}}>▲</div>
+                            <div style={{...addWidgetMenuTriangleStyle, fontSize: this.props.widgetMenuOpened ? "24px" : "0"}}>▲</div>
                             Add
                         </div>
                         <div className="styled-button" role="button" style={navbarIconStyle} onClick={this.handleDisconnect}>Disconnect</div>
@@ -119,8 +122,8 @@ const navbarIconStyle: CSSProperties = {
 const addWidgetMenuTriangleStyle: CSSProperties = {
     position: "absolute",
     top: "50px",
-    zIndex: 1234,
-    color: "black",
+    zIndex: 2147483647,
+    color: "white",
     fontSize: "24px",
     transition: "all .5s"
 };
@@ -132,9 +135,16 @@ const addWidgetMenuStyle: CSSProperties = {
     height: "200px",
     width: "25vmax",
     right: "20px",
-    backgroundColor: "black",
     borderRadius: "10px",
-    transition: "all .5s"
+    transition: "all .5s",
+    backgroundColor: "white",
+    overflow: "hidden"
+};
+
+const addWidgetMenuStyleDisabled: CSSProperties = {
+    "WebkitBoxShadow":"0px 0px 20px 2px rgba(38,38,38,1)",
+    "MozBoxShadow":"0px 0px 20px 2px rgba(38,38,38,1)",
+    "boxShadow":"0px 0px 20px 2px rgba(38,38,38,1)"
 };
 
 export default NavBar;

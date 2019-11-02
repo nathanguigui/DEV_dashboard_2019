@@ -8,11 +8,6 @@ import {
     defaultWidgetNavbarStyle,
     defaultWidgetStyle
 } from "../../Pages/homePage";
-import Times from "../../Assets/times-solid.svg"
-import Wrench from "../../Assets/wrench-solid.svg"
-import Left from "../../Assets/caret-left-solid.svg"
-import Right from "../../Assets/caret-right-solid.svg"
-import Trash from "../../Assets/trash-alt-solid.svg"
 import {Widget} from "../../Graphql/clientTypes";
 import "../../Styles/subclass.css"
 
@@ -69,7 +64,7 @@ class DefaultWidget extends  React.Component<DefaultWidgetProps, DefaultWidgetSt
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return (
-            <div className="widget" style={{...defaultWidgetStyle, order: this.props.widget.order}}>
+            <div className="widget" style={{...defaultWidgetStyle, order: this.props.widget.order, boxShadow : "0 0 8px 0 rgba(0, 0, 0 ,0.30)", margin: 10}}>
                 <div style={defaultWidgetNavbarStyle}>
                     <div className="styled-button" role="button" onClick={this.handleRemove} style={{...defaultWidgetNavbarSingleButton, borderTopLeftRadius: "5px", borderLeft: "none!important", borderRight: "solid"}}>
                         <i style={IconStyle} className="fas styled-icons fa-trash-alt"/>

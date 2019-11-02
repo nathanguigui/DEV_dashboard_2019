@@ -53,7 +53,8 @@ const InitialState = {
     token: window.localStorage.getItem("token"),
     search: "",
     component: LoginComponent,
-    sidebarDisabled: false
+    sidebarDisabled: true,
+    widgetMenuOpened: false,
 };
 
 type AuthState = Readonly<typeof InitialState>
@@ -65,7 +66,8 @@ class App extends Component<object, AuthState> {
     constructor(props:any) {
         super(props);
         this.state = InitialState;
-        this.handleSidebarDisable = this.handleSidebarDisable.bind(this)
+        this.handleSidebarDisable = this.handleSidebarDisable.bind(this);
+        this.handleSwitchWidgetMenu = this.handleSwitchWidgetMenu.bind(this);
         this.fetchInfos = this.fetchInfos.bind(this)
     }
 
@@ -79,6 +81,10 @@ class App extends Component<object, AuthState> {
     componentDidMount(): void {
         this.fetchInfos();
     }
+
+    handleSwitchWidgetMenu = (val: boolean) => {
+        this.setState({widgetMenuOpened: val})
+    };
 
     handleSidebarDisable = () => {
         let tmp: UpdateMeInput = {};
@@ -99,7 +105,7 @@ class App extends Component<object, AuthState> {
             <AuthContext.Provider value={appState}>
                 <div className="App">
                     <Router>
-                        {AppHeader(this.handleSidebarDisable, this.state.sidebarDisabled)}
+                        {AppHeader(this.handleSidebarDisable, this.state.sidebarDisabled, this.handleSwitchWidgetMenu, this.state.widgetMenuOpened)}
                     </Router>
                 </div>
             </AuthContext.Provider>

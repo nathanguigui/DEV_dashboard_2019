@@ -24,15 +24,15 @@ function PrivateRoute({ children, ...rest }) {
   );
 }
 
-export function AppHeader(disableSidebar: () => void, sidebarDisabled: boolean) {
+export function AppHeader(disableSidebar: () => void, sidebarDisabled: boolean, switchWidgetMenu: (val:boolean) => void, widgetMenu: boolean) {
     return (
         <AuthContext.Consumer>
             {context => (
                 <>
                     {(context.token) ?
                         <>
-                            <NavBar sidebarDisabled={sidebarDisabled} disableSidebar={disableSidebar}/>
-                            <SideBar sidebarDisabled={sidebarDisabled}/>
+                            <NavBar sidebarDisabled={sidebarDisabled} disableSidebar={disableSidebar} switchWidgetMenu={switchWidgetMenu} widgetMenuOpened={widgetMenu}/>
+                            <SideBar sidebarDisabled={sidebarDisabled} switchWidgetMenu={switchWidgetMenu} widgetMenuOpened={widgetMenu}/>
                         </>
                         :
                         <>

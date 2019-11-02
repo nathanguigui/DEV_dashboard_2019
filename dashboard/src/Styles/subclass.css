@@ -19,3 +19,16 @@
     color: black;
     transition: all ease-in-out 0.25s;
 }
+
+.new-widget-button {
+    color: grey!important;
+    border-color: grey!important;
+    cursor: pointer;
+    transition: all ease-in-out 0.25s;
+}
+
+.new-widget-button:hover {
+    color: whitesmoke!important;
+    border-color: whitesmoke!important;
+    background-color: grey!important;
+}

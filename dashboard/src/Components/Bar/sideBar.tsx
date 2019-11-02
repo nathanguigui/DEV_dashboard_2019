@@ -9,6 +9,8 @@ import LoadingFc from "../miniComponent/loading";
 
 interface SideBarProps {
     sidebarDisabled: boolean
+    switchWidgetMenu: (val:boolean) => void
+    widgetMenuOpened: boolean
 }
 
 interface SideBarState {
@@ -39,7 +41,7 @@ class SideBar extends React.Component<SideBarProps, SideBarState> {
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
-            <div style={containerStyle} className="containAllContent">
+            <div onClick={() => {this.props.switchWidgetMenu(false)}} style={containerStyle} className="containAllContent">
                 <div style={!this.props.sidebarDisabled ? sidebarStyle : {...sidebarStyle, width: "0%"}} className="sidebar">
                     {!this.props.sidebarDisabled ?
                         this.state.loading ?
@@ -48,7 +50,7 @@ class SideBar extends React.Component<SideBarProps, SideBarState> {
 
                     }
                 </div>
-                <div style={!this.props.sidebarDisabled ? {...contentStyle, paddingLeft: "30px", paddingRight: "10px"} : {...contentStyle, width: "100%"}} className="content">
+                <div style={!this.props.sidebarDisabled ? {...contentStyle, paddingLeft: "30px", paddingRight: "10px", paddingTop : 15} : {...contentStyle, width: "100%", padding : 15}} className="content">
                     <PrivateRoute path="/" exact component={HomePage}/>
                 </div>
             </div>
@@ -67,7 +69,7 @@ const containerStyle : CSSProperties = {
 const sidebarStyle : CSSProperties = {
     backgroundColor: AppColors.textAndIcons,
     transition: "all .25s linear",
-    width: "12%"
+    width: "300px"
 };
 
 const sidebarContentStyle : CSSProperties = {
