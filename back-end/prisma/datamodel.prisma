@@ -5,6 +5,8 @@ enum UserType {
 
 enum WidgetType {
   WORLD_TIME
+  PORNHUB
+  XVIDEO
 }
 
 type Widget {

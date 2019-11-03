@@ -5,6 +5,7 @@ import { sign } from 'jsonwebtoken'
 import { prisma } from '../generated/prisma-client';
 import {prismaObjectType} from "nexus-prisma";
 
+// @ts-ignore
 export const Mutation = prismaObjectType({
   name: 'Mutation',
   definition(t) {
