@@ -4,10 +4,10 @@ import {PrivateRoute} from "../Auth/privateRoute";
 import HomePage from "../../Pages/homePage";
 import {GraphqlClient} from "../../App";
 import {ME_PROFILE, MeQuerydata} from "../../Graphql/User/Query/Me";
-import { ApolloQueryResult } from "apollo-client";
+import {ApolloQueryResult} from "apollo-client";
 import LoadingFc from "../miniComponent/loading";
 import Popup from "../miniComponent/popup";
-import GoogleLogin from "react-google-login";
+import {googleScopes, googleUrlBuilder} from "../OAuth2/Google/utils";
 
 interface SideBarProps {
     sidebarDisabled: boolean
@@ -79,9 +79,8 @@ class SideBar extends React.Component<SideBarProps, SideBarState> {
     }
 
     openIntraPopup(): void {
-        this.openPopup(
-            true,
-            <iframe id={"oauth2-frame"} ref={this.oauth2IframeRef} onLoad={this.handleIframeLoad} src="google.com"/>)
+        let src = googleUrlBuilder({scope: googleScopes.GMAIL_LABELS});
+        window.location.href = src;
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
@@ -96,14 +95,7 @@ class SideBar extends React.Component<SideBarProps, SideBarState> {
                                 <div style={sidebarContentStyle}>{this.state.data && this.state.data.me && this.state.data.me.name}</div>
                                 {this.state.data && this.state.data.me && this.state.data.me.googleToken ?
                                     <div style={sidebarContentStyle}>{this.state.data.me.googleToken}</div> :
-
-<GoogleLogin
-    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-    buttonText="Login"
-    onSuccess={responseGoogle}
-    onFailure={responseGoogle}
-    cookiePolicy={'single_host_origin'}
-  />
+                                    <div onClick={this.openIntraPopup}>connect with google</div>
                                 }
                             </div>
                         :<span/>
