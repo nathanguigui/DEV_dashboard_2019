@@ -14,7 +14,9 @@
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
     "react": "^16.11.0",
+    "react-contenteditable": "^3.3.2",
     "react-dom": "^16.11.0",
+    "react-google-login": "^5.0.7",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "typescript": "3.6.4"

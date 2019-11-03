@@ -17,6 +17,7 @@ import {ADD_WIDGET_MUTATION} from "../../Graphql/Widget/Mutation/AddWidget";
 import {UPDATE_ME} from "../../Graphql/User/Mutation/UpdateMe";
 import "../../Styles/subclass.css"
 import WidgetListMenu from "../Menu/widgetListMenu";
+import Popup from "../miniComponent/popup";
 
 interface NavBarProps {
     disableSidebar: () => void
@@ -25,12 +26,23 @@ interface NavBarProps {
     widgetMenuOpened: boolean
 }
 
-class NavBar extends React.Component<NavBarProps> {
+interface NavBarState {
+    popupOpened: boolean
+    popupContent: React.ReactNode
+}
+
+class NavBar extends React.Component<NavBarProps, NavBarState> {
 
     constructor(props:any) {
         super(props);
+        this.state = {
+            popupOpened: false,
+            popupContent: <p>loading</p>
+        };
         this.addCustomWidget = this.addCustomWidget.bind(this);
         this.handleAddWidget = this.handleAddWidget.bind(this);
+        this.setPopup = this.setPopup.bind(this);
+        this.closePopup = this.closePopup.bind(this);
     }
 
     handleDisconnect() {
@@ -40,6 +52,14 @@ class NavBar extends React.Component<NavBarProps> {
 
     handleAddWidget() {
         this.props.switchWidgetMenu(!this.props.widgetMenuOpened);
+    }
+
+    setPopup(content: React.ReactNode) {
+        this.setState({popupOpened: true, popupContent: content});
+    }
+
+    closePopup() {
+        this.setState({popupOpened: false})
     }
 
     addCustomWidget() {
@@ -69,13 +89,16 @@ class NavBar extends React.Component<NavBarProps> {
                     <div style={{maxWidth: "55px"}}>
                         <img style={{width: "75%", margin: "5px"}} className={this.props.sidebarDisabled ? "rotate-90-ccw" : "rotate-90-cw"} onClick={this.props.disableSidebar} src={Bars}/>
                     </div>
-                    <div style={{display : 'flex', justifyContent: 'center', alignItems : 'center', height : '100%' }}>
+                    {
+                        this.state.popupOpened && <Popup content={this.state.popupContent} closePopup={this.closePopup} />
+                    }
+                    <div className="navbar-button" style={{display : 'flex', justifyContent: 'center', alignItems : 'center', height : '100%' }}>
                         {this.props.widgetMenuOpened ?
                             <div className="widget-menu" style={{...addWidgetMenuStyle, ...addWidgetMenuStyleDisabled, height: "200px"}}>
-                                {this.props.widgetMenuOpened && <WidgetListMenu/>}
+                                {this.props.widgetMenuOpened && <WidgetListMenu closePopup={this.closePopup} openPopup={this.setPopup} switchMenu={this.props.switchWidgetMenu}/>}
                             </div> :
                             <div className="widget-menu" style={{...addWidgetMenuStyle, height: 0}}>
-                                {this.props.widgetMenuOpened && <WidgetListMenu/>}
+                                {this.props.widgetMenuOpened && <WidgetListMenu closePopup={this.closePopup} openPopup={this.setPopup} switchMenu={this.props.switchWidgetMenu}/>}
                             </div>
                         }
                         <div className="styled-button" role="button" style={navbarIconStyle} onClick={this.handleAddWidget}>

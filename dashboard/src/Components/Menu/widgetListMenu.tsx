@@ -1,11 +1,28 @@
 import React, {CSSProperties} from "react";
 import "../../Styles/subclass.css"
+import {WidgetType} from "../../Graphql/clientTypes";
+import WorldTimeWidget from "../Widget/worldtimeapi.org/WorldTimeWidget";
 
-class WidgetListMenu extends React.Component {
+interface WidgetListMenuProps {
+    switchMenu: (val: boolean) => void
+    openPopup: (content: React.ReactNode) => void
+    closePopup: () => void
+}
+
+class WidgetListMenu extends React.Component<WidgetListMenuProps> {
+
+    handleAddCustomWidget(widgetType: WidgetType) {
+        switch (widgetType) {
+            case WidgetType.WorldTime:
+                this.props.openPopup(WorldTimeWidget.getInitSettings());
+                this.props.switchMenu(false);
+        }
+    }
+
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return (
             <div style={WidgetListMenuContainerStyle}>
-                <div className="new-widget-button" style={WidgetButtonStyle}>
+                <div onClick={() => {this.handleAddCustomWidget(WidgetType.WorldTime)}} className="new-widget-button" style={WidgetButtonStyle}>
                     <i className="fa-4x far fa-clock"/>
                     addWorldtime
                 </div>

@@ -9,12 +9,15 @@ import {UPDATE_ME, UpdateMeMutationData} from "../../../Graphql/User/Mutation/Up
 import {
     MutationUpdateWidgetArgs,
     UpdateMeInput,
-    UpdateMeWidgetsInput,
-    Widget,
+    UpdateMeWidgetsInput, User,
+    Widget, WidgetCreateInput, WidgetType,
     WidgetUpdateInput
 } from "../../../Graphql/clientTypes";
 import LoadingFc from "../../miniComponent/loading";
 import {UPDATE_WIDGET_MUTATION, UpdateWidgetMutationData} from "../../../Graphql/Widget/Mutation/UpdateWidget";
+import {ADD_WIDGET_MUTATION} from "../../../Graphql/Widget/Mutation/AddWidget";
+import {MutationUpdateMeArgs} from "../../../../tools/out/client";
+import AddWordlTimeWidget from "./addWordlTimeWidget";
 
 interface WorldTimeWidgetSettings {
     timezone: string
@@ -52,6 +55,10 @@ class WorldTimeWidget extends  React.Component<WorldTimeWidgetProps, WorldTimeWi
         this.loadSettingsData = this.loadSettingsData.bind(this);
         this.triggerCornerClick = this.triggerCornerClick.bind(this);
         this.getContent = this.getContent.bind(this)
+    }
+
+    static getInitSettings(): ReactNode {
+        return <AddWordlTimeWidget/>
     }
 
     updateMe(): void {

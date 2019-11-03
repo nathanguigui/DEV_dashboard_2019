@@ -19,6 +19,7 @@ COPYRIGHT https://github.com/finnhvman/matter
 
 /* Input, Textarea */
 .matter-textfield-outlined > input,
+.matter-textfield-outlined > select,
 .matter-textfield-outlined > textarea {
     box-sizing: border-box;
     margin: 0;
@@ -41,12 +42,14 @@ COPYRIGHT https://github.com/finnhvman/matter
 }
 
 .matter-textfield-outlined > input:not(:focus):placeholder-shown,
+.matter-textfield-outlined > select:not(:focus):placeholder-shown,
 .matter-textfield-outlined > textarea:not(:focus):placeholder-shown {
     border-top-color: var(--matter-helper-safari2);
 }
 
 /* Span */
 .matter-textfield-outlined > input + span,
+.matter-textfield-outlined > select + span,
 .matter-textfield-outlined > textarea + span {
     position: absolute;
     top: 0;
@@ -62,6 +65,7 @@ COPYRIGHT https://github.com/finnhvman/matter
 }
 
 .matter-textfield-outlined > input:not(:focus):placeholder-shown + span,
+.matter-textfield-outlined > select:not(:focus):placeholder-shown + span,
 .matter-textfield-outlined > textarea:not(:focus):placeholder-shown + span {
     font-size: inherit;
     line-height: 68px;
@@ -70,6 +74,8 @@ COPYRIGHT https://github.com/finnhvman/matter
 /* Corners */
 .matter-textfield-outlined > input + span::before,
 .matter-textfield-outlined > input + span::after,
+.matter-textfield-outlined > select + span::before,
+.matter-textfield-outlined > select + span::after,
 .matter-textfield-outlined > textarea + span::before,
 .matter-textfield-outlined > textarea + span::after {
     content: "";
@@ -85,6 +91,7 @@ COPYRIGHT https://github.com/finnhvman/matter
 }
 
 .matter-textfield-outlined > input + span::before,
+.matter-textfield-outlined > select + span::before,
 .matter-textfield-outlined > textarea + span::before {
     margin-right: 4px;
     border-left: solid 1px transparent;
@@ -92,6 +99,7 @@ COPYRIGHT https://github.com/finnhvman/matter
 }
 
 .matter-textfield-outlined > input + span::after,
+.matter-textfield-outlined > select + span::after,
 .matter-textfield-outlined > textarea + span::after {
     flex-grow: 1;
     margin-left: 4px;
@@ -100,32 +108,39 @@ COPYRIGHT https://github.com/finnhvman/matter
 }
 
 .matter-textfield-outlined > input:not(:focus):placeholder-shown + span::before,
+.matter-textfield-outlined > select:not(:focus):placeholder-shown + span::before,
 .matter-textfield-outlined > textarea:not(:focus):placeholder-shown + span::before,
 .matter-textfield-outlined > input:not(:focus):placeholder-shown + span::after,
+.matter-textfield-outlined > select:not(:focus):placeholder-shown + span::after,
 .matter-textfield-outlined > textarea:not(:focus):placeholder-shown + span::after {
     border-top-color: transparent;
 }
 
 /* Hover */
 .matter-textfield-outlined:hover > input,
+.matter-textfield-outlined:hover > select,
 .matter-textfield-outlined:hover > textarea {
     border-color: transparent var(--matter-helper-safari3) var(--matter-helper-safari3);
 }
 
 .matter-textfield-outlined:hover > input + span::before,
+.matter-textfield-outlined:hover > select + span::before,
 .matter-textfield-outlined:hover > textarea + span::before,
 .matter-textfield-outlined:hover > input + span::after,
+.matter-textfield-outlined:hover > select + span::after,
 .matter-textfield-outlined:hover > textarea + span::after {
     border-top-color: var(--matter-helper-safari3);
 }
 
 .matter-textfield-outlined:hover > input:not(:focus):placeholder-shown,
+.matter-textfield-outlined:hover > select:not(:focus):placeholder-shown,
 .matter-textfield-outlined:hover > textarea:not(:focus):placeholder-shown {
     border-color: var(--matter-helper-safari3);
 }
 
 /* Focus */
 .matter-textfield-outlined > input:focus,
+.matter-textfield-outlined > select:focus,
 .matter-textfield-outlined > textarea:focus {
     border-color: transparent var(--matter-helper-theme) var(--matter-helper-theme);
     box-shadow: inset 1px 0 var(--matter-helper-theme), inset -1px 0 var(--matter-helper-theme), inset 0 -1px var(--matter-helper-theme);
@@ -133,12 +148,15 @@ COPYRIGHT https://github.com/finnhvman/matter
 }
 
 .matter-textfield-outlined > input:focus + span,
+.matter-textfield-outlined > select:focus + span,
 .matter-textfield-outlined > textarea:focus + span {
     color: var(--matter-helper-theme);
 }
 
 .matter-textfield-outlined > input:focus + span::before,
 .matter-textfield-outlined > input:focus + span::after,
+.matter-textfield-outlined > select:focus + span::before,
+.matter-textfield-outlined > select:focus + span::after,
 .matter-textfield-outlined > textarea:focus + span::before,
 .matter-textfield-outlined > textarea:focus + span::after {
     border-top-color: var(--matter-helper-theme) !important;
@@ -148,6 +166,8 @@ COPYRIGHT https://github.com/finnhvman/matter
 /* Disabled */
 .matter-textfield-outlined > input:disabled,
 .matter-textfield-outlined > input:disabled + span,
+.matter-textfield-outlined > select:disabled,
+.matter-textfield-outlined > select:disabled + span,
 .matter-textfield-outlined > textarea:disabled,
 .matter-textfield-outlined > textarea:disabled + span {
     border-color: transparent var(--matter-helper-safari1) var(--matter-helper-safari1) !important;
@@ -157,6 +177,8 @@ COPYRIGHT https://github.com/finnhvman/matter
 
 .matter-textfield-outlined > input:disabled + span::before,
 .matter-textfield-outlined > input:disabled + span::after,
+.matter-textfield-outlined > select:disabled + span::before,
+.matter-textfield-outlined > select:disabled + span::after,
 .matter-textfield-outlined > textarea:disabled + span::before,
 .matter-textfield-outlined > textarea:disabled + span::after {
     border-top-color: var(--matter-helper-safari1) !important;
@@ -164,6 +186,8 @@ COPYRIGHT https://github.com/finnhvman/matter
 
 .matter-textfield-outlined > input:disabled:placeholder-shown,
 .matter-textfield-outlined > input:disabled:placeholder-shown + span,
+.matter-textfield-outlined > select:disabled:placeholder-shown,
+.matter-textfield-outlined > select:disabled:placeholder-shown + span,
 .matter-textfield-outlined > textarea:disabled:placeholder-shown,
 .matter-textfield-outlined > textarea:disabled:placeholder-shown + span {
     border-top-color: var(--matter-helper-safari1) !important;
@@ -171,6 +195,8 @@ COPYRIGHT https://github.com/finnhvman/matter
 
 .matter-textfield-outlined > input:disabled:placeholder-shown + span::before,
 .matter-textfield-outlined > input:disabled:placeholder-shown + span::after,
+.matter-textfield-outlined > select:disabled:placeholder-shown + span::before,
+.matter-textfield-outlined > select:disabled:placeholder-shown + span::after,
 .matter-textfield-outlined > textarea:disabled:placeholder-shown + span::before,
 .matter-textfield-outlined > textarea:disabled:placeholder-shown + span::after {
     border-top-color: transparent !important;
@@ -181,10 +207,14 @@ COPYRIGHT https://github.com/finnhvman/matter
     @supports (-webkit-appearance:none) {
         .matter-textfield-outlined > input,
         .matter-textfield-outlined > input + span,
+        .matter-textfield-outlined > select,
+        .matter-textfield-outlined > select + span,
         .matter-textfield-outlined > textarea,
         .matter-textfield-outlined > textarea + span,
         .matter-textfield-outlined > input + span::before,
         .matter-textfield-outlined > input + span::after,
+        .matter-textfield-outlined > select + span::before,
+        .matter-textfield-outlined > select + span::after,
         .matter-textfield-outlined > textarea + span::before,
         .matter-textfield-outlined > textarea + span::after {
             transition-duration: 0.1s;
