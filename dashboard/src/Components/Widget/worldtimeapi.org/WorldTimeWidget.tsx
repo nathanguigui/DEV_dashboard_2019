@@ -16,7 +16,6 @@ import {
 import LoadingFc from "../../miniComponent/loading";
 import {UPDATE_WIDGET_MUTATION, UpdateWidgetMutationData} from "../../../Graphql/Widget/Mutation/UpdateWidget";
 import {ADD_WIDGET_MUTATION} from "../../../Graphql/Widget/Mutation/AddWidget";
-import {MutationUpdateMeArgs} from "../../../../tools/out/client";
 import AddWordlTimeWidget from "./addWordlTimeWidget";
 
 interface WorldTimeWidgetSettings {
