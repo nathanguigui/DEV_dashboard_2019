@@ -3,11 +3,14 @@ import {MutationUpdateMeArgs, User, WidgetCreateInput, WidgetType} from "../../.
 import {GraphqlClient} from "../../../App";
 import {ADD_WIDGET_MUTATION} from "../../../Graphql/Widget/Mutation/AddWidget";
 import {UPDATE_ME} from "../../../Graphql/User/Mutation/UpdateMe";
+import LoadingFc from "../../miniComponent/loading";
+import {addMeWidget, AUTO_WIDGET_ORDER} from "../utils/newWidget";
 
 interface AddWordlTimeWidgetState {
     name: string
     timezone: string
     timezoneList: Array<string>
+    loading: boolean
 }
 
 class AddWordlTimeWidget extends React.Component<Object, AddWordlTimeWidgetState> {
@@ -17,7 +20,8 @@ class AddWordlTimeWidget extends React.Component<Object, AddWordlTimeWidgetState
         this.state = {
             name: "",
             timezone: "",
-            timezoneList: []
+            timezoneList: [],
+            loading: true
         }
         this.createWidget = this.createWidget.bind(this);
     }
@@ -37,33 +41,26 @@ class AddWordlTimeWidget extends React.Component<Object, AddWordlTimeWidgetState
     }
 
     createWidget = () => {
-        let tmp: WidgetCreateInput = {
+        let newWidget: WidgetCreateInput = {
             settings: '{"timezone": "' + this.state.timezone + '"}',
             title: this.state.name,
             type: WidgetType.WorldTime,
-            order: 2
+            order: AUTO_WIDGET_ORDER
         };
-        GraphqlClient.mutate({
-            mutation: ADD_WIDGET_MUTATION,
-            variables: {data: tmp}
-        }).then((res) => {
-            GraphqlClient.mutate<User, MutationUpdateMeArgs>({
-                mutation: UPDATE_ME, variables: {
-                    data: {
-                        widgets: {
-                            connect: [
-                                {id: res.data.createWidget.id}
-                            ]
-                        }
-                    }
-                }
-            }).then((res) => {
-                window.location.reload()
-            })
+        addMeWidget(newWidget).then((success:boolean) => {
+            if (success)
+                window.location.reload();
+            else
+                console.warn("cant create widget")
         })
     };
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
+        if (this.state.loading)
+            return (
+            <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                {LoadingFc()}
+            </div>);
         return (
             <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                 <h2>Add World Time Widget</h2>

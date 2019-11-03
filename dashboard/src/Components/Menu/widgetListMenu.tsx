@@ -24,7 +24,7 @@ class WidgetListMenu extends React.Component<WidgetListMenuProps> {
             <div style={WidgetListMenuContainerStyle}>
                 <div onClick={() => {this.handleAddCustomWidget(WidgetType.WorldTime)}} className="new-widget-button" style={WidgetButtonStyle}>
                     <i className="fa-4x far fa-clock"/>
-                    addWorldtime
+                    World Time
                 </div>
             </div>
         )
