@@ -28,6 +28,3 @@ export async function addMeWidget(props: WidgetCreateInput): Promise<boolean> {
     }
     return false
 }
-
-src/Components/Menu/widgetListMenu.tsx b/dashboard/src/Components/Menu/widgetListMenu.tsx
-src/Components/Widget/worldtimeapi.org/addWordlTimeWidget.tsx b/dashboard/src/Components/Widget/worldtimeapi.org/addWordlTimeWidget.tsx

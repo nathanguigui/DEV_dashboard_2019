@@ -22,3 +22,4 @@
 - add widget in `./dashboard/src/Components/Menu/widgetListMenu.tsx`:
   - add button
   - add call to `getInitSettings` of the widget in the switch of `handleAddCustomWidget`
+- add widget into switch in `./dashboard/src/Components/Pages/homePage.tsx`

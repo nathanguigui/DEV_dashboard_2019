@@ -7,6 +7,7 @@ import {Widget, WidgetType, WidgetUpdateInput} from "../Graphql/clientTypes";
 import {UPDATE_ME} from "../Graphql/User/Mutation/UpdateMe";
 import {UPDATE_WIDGET_MUTATION} from "../Graphql/Widget/Mutation/UpdateWidget";
 import AppColors from "../Styles/AppColors";
+import PornHubWidget from "../Components/Widget/pornhub.com/PornHubWidget";
 
 interface HomePageState {
     loading: boolean
@@ -120,6 +121,8 @@ class HomePage extends Component<Object, HomePageState> {
         switch (widget.type) {
             case WidgetType.WorldTime:
                 return <WorldTimeWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
+            case WidgetType.Pornhub:
+                return <PornHubWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
         }
     }
 

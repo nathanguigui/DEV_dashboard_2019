@@ -1,33 +1,17 @@
 import React, {ReactNode} from "react";
 import WorldTimeApi from "../../../Types/worldtimeapi.org/types";
-import momentTz from 'moment-timezone';
 import moment from 'moment';
 import DefaultWidget from "../DefaultWidget";
 import {GraphqlClient} from "../../../App";
-import {ME_PROFILE, MeQuerydata} from "../../../Graphql/User/Query/Me";
-import {UPDATE_ME, UpdateMeMutationData} from "../../../Graphql/User/Mutation/UpdateMe";
 import {
     MutationUpdateWidgetArgs,
-    UpdateMeInput,
-    UpdateMeWidgetsInput, User,
-    Widget, WidgetCreateInput, WidgetType,
     WidgetUpdateInput
 } from "../../../Graphql/clientTypes";
 import LoadingFc from "../../miniComponent/loading";
 import {UPDATE_WIDGET_MUTATION, UpdateWidgetMutationData} from "../../../Graphql/Widget/Mutation/UpdateWidget";
-import {ADD_WIDGET_MUTATION} from "../../../Graphql/Widget/Mutation/AddWidget";
 import AddWordlTimeWidget from "./addWordlTimeWidget";
+import {WidgetProps, WorldTimeWidgetSettings} from "../widgetTypes";
 
-interface WorldTimeWidgetSettings {
-    timezone: string
-}
-
-interface WorldTimeWidgetProps {
-    widget: Widget
-    moveLeft: (widget:Widget) => Promise<boolean>
-    moveRight: (widget:Widget) => Promise<boolean>
-    remove: (widget:Widget) => void
-}
 
 interface WorldTimeWidgetState {
     data: WorldTimeApi.Ip | null
@@ -37,8 +21,8 @@ interface WorldTimeWidgetState {
     selectedTimezoneForm: string
 }
 
-class WorldTimeWidget extends  React.Component<WorldTimeWidgetProps, WorldTimeWidgetState> {
-    constructor(props:WorldTimeWidgetProps) {
+class WorldTimeWidget extends  React.Component<WidgetProps, WorldTimeWidgetState> {
+    constructor(props:WidgetProps) {
         super(props);
         let settings: WorldTimeWidgetSettings = JSON.parse(props.widget.settings);
         this.state = {

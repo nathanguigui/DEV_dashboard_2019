@@ -417,6 +417,8 @@ enum WidgetOrderByInput {
 
 enum WidgetType {
   WORLD_TIME
+  PORNHUB
+  XVIDEO
 }
 
 input WidgetUpdateInput {

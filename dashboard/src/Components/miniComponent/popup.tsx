@@ -40,7 +40,8 @@ const popupStyle: CSSProperties = {
     backgroundColor: "white",
     color: "grey",
     boxShadow : "0 0 8px 0 rgba(0, 0, 0 ,0.30)",
-    borderRadius: "10px"
+    borderRadius: "10px",
+    transition: "0.25s"
 };
 
 const IconStyle: CSSProperties = {

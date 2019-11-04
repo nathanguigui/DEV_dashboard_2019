@@ -1,10 +1,8 @@
-import React, {ReactNode, useState} from "react";
-import {MutationUpdateMeArgs, User, WidgetCreateInput, WidgetType} from "../../../Graphql/clientTypes";
-import {GraphqlClient} from "../../../App";
-import {ADD_WIDGET_MUTATION} from "../../../Graphql/Widget/Mutation/AddWidget";
-import {UPDATE_ME} from "../../../Graphql/User/Mutation/UpdateMe";
+import React from "react";
+import {WidgetCreateInput, WidgetType} from "../../../Graphql/clientTypes";
 import LoadingFc from "../../miniComponent/loading";
 import {addMeWidget, AUTO_WIDGET_ORDER} from "../utils/newWidget";
+import {AddWidgetForm} from "../utils/addWidgetForm";
 
 interface AddWordlTimeWidgetState {
     name: string
@@ -22,15 +20,16 @@ class AddWordlTimeWidget extends React.Component<Object, AddWordlTimeWidgetState
             timezone: "",
             timezoneList: [],
             loading: true
-        }
+        };
         this.createWidget = this.createWidget.bind(this);
+        this.getFormContent = this.getFormContent.bind(this);
     }
 
     loadSettingsData(): void {
         if (this.state.timezoneList.length === 0) {
             fetch("http://worldtimeapi.org/api/timezone").then((promise) => {
                 promise.json().then((timezones:Array<string>) => {
-                    this.setState({timezoneList: timezones})
+                    this.setState({timezoneList: timezones, loading: false})
                 })
             });
         }
@@ -55,15 +54,9 @@ class AddWordlTimeWidget extends React.Component<Object, AddWordlTimeWidgetState
         })
     };
 
-    render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
-        if (this.state.loading)
-            return (
-            <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-                {LoadingFc()}
-            </div>);
+    getFormContent = (): React.ReactNode => {
         return (
-            <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-                <h2>Add World Time Widget</h2>
+            <>
                 <label style={{width: "100%", margin: "20px"}} className="matter-textfield-outlined">
                     <input onChange={(e:any) => {this.setState({name: e.target.value})}} value={this.state.name} type="title" id="title" name="title" placeholder=" "/>
                     <span>Title :</span>
@@ -76,8 +69,22 @@ class AddWordlTimeWidget extends React.Component<Object, AddWordlTimeWidgetState
                     </select>
                     <span>Timezone :</span>
                 </label>
-                <button onClick={() => {this.createWidget()}} className="matter-button-outlined">Add Widget</button>
-            </div>
+            </>
+        )
+    };
+
+    render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
+        if (this.state.loading)
+            return (
+            <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                {LoadingFc()}
+            </div>);
+        return (
+            AddWidgetForm({
+                formTitle: "Add World Time Widget",
+                formValidationFc: this.createWidget,
+                formContent: this.getFormContent()
+            })
         )
     }
 

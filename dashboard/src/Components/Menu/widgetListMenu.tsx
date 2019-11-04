@@ -2,6 +2,7 @@ import React, {CSSProperties} from "react";
 import "../../Styles/subclass.css"
 import {WidgetType} from "../../Graphql/clientTypes";
 import WorldTimeWidget from "../Widget/worldtimeapi.org/WorldTimeWidget";
+import PornHubWidget from "../Widget/pornhub.com/PornHubWidget";
 
 interface WidgetListMenuProps {
     switchMenu: (val: boolean) => void
@@ -16,6 +17,10 @@ class WidgetListMenu extends React.Component<WidgetListMenuProps> {
             case WidgetType.WorldTime:
                 this.props.openPopup(WorldTimeWidget.getInitSettings());
                 this.props.switchMenu(false);
+                break;
+            case WidgetType.Pornhub:
+                this.props.openPopup(PornHubWidget.getInitSettings());
+                this.props.switchMenu(false);
         }
     }
 
@@ -25,6 +30,10 @@ class WidgetListMenu extends React.Component<WidgetListMenuProps> {
                 <div onClick={() => {this.handleAddCustomWidget(WidgetType.WorldTime)}} className="new-widget-button" style={WidgetButtonStyle}>
                     <i className="fa-4x far fa-clock"/>
                     World Time
+                </div>
+                <div onClick={() => {this.handleAddCustomWidget(WidgetType.Pornhub)}} className="new-widget-button" style={WidgetButtonStyle}>
+                    <i className="fa-4x far fa-clock"/>
+                    PornHub
                 </div>
             </div>
         )
