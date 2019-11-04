@@ -54,7 +54,8 @@ const WidgetButtonStyle: CSSProperties = {
     alignItems: "center",
     padding: "10px",
     border: "solid 2px",
-    borderRadius: "10px"
+    borderRadius: "10px",
+    width: "20%"
 };
 
 export default WidgetListMenu;
