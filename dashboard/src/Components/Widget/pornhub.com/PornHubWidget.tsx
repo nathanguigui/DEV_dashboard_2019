@@ -3,9 +3,6 @@ import {PornHubWidgetSettings, WidgetProps} from "../widgetTypes";
 import DefaultWidget from "../DefaultWidget";
 import AddPornHubWidget from "./addPornHubWidget";
 
-const Video = require("pornhub-api").Videos;
-
-
 interface PornHubWidgetState {
     loading: boolean
     settings: PornHubWidgetSettings
@@ -35,7 +32,6 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
     }
 
     updateMe() {
-        console.log(Video)
     }
 
     triggerCornerClick() {
