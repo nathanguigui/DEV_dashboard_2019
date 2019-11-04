@@ -490,7 +490,8 @@ export enum WidgetOrderByInput {
 export enum WidgetType {
   WorldTime = 'WORLD_TIME',
   Pornhub = 'PORNHUB',
-  Xvideo = 'XVIDEO'
+  Xvideo = 'XVIDEO',
+  Cryptocompare = 'CRYPTOCOMPARE'
 }
 
 export type WidgetUpdateInput = {

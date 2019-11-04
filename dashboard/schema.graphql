@@ -419,6 +419,7 @@ enum WidgetType {
   WORLD_TIME
   PORNHUB
   XVIDEO
+  CRYPTOCOMPARE
 }
 
 input WidgetUpdateInput {
