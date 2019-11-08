@@ -14,3 +14,12 @@ export interface WorldTimeWidgetSettings {
 export interface PornHubWidgetSettings {
     query: string
 }
+
+export interface CryptocompareWidgetSettings {
+    CryptoType: string
+    ChangeType: string
+}
+
+export interface NumberApiWidgetSettings {
+    value: string
+}

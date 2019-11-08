@@ -492,7 +492,7 @@ export enum WidgetType {
   Pornhub = 'PORNHUB',
   Xvideo = 'XVIDEO',
   Cryptocompare = 'CRYPTOCOMPARE',
-  Numbersapi = 'NUMBERSAPI',
+  NumbersApi = 'NUMBERSAPI',
   Icdnb = 'ICDNB',
   Openweathermap = 'OPENWEATHERMAP'
 }
