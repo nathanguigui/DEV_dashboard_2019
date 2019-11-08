@@ -8,6 +8,8 @@ enum WidgetType {
   PORNHUB
   XVIDEO
   CRYPTOCOMPARE
+  NUMBERSAPI
+  ICDNB
 }
 
 type Widget {
