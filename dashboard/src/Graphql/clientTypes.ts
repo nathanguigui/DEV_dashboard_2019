@@ -491,7 +491,10 @@ export enum WidgetType {
   WorldTime = 'WORLD_TIME',
   Pornhub = 'PORNHUB',
   Xvideo = 'XVIDEO',
-  Cryptocompare = 'CRYPTOCOMPARE'
+  Cryptocompare = 'CRYPTOCOMPARE',
+  Numbersapi = 'NUMBERSAPI',
+  Icdnb = 'ICDNB',
+  Openweathermap = 'OPENWEATHERMAP'
 }
 
 export type WidgetUpdateInput = {
