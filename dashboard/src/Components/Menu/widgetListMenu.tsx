@@ -4,6 +4,8 @@ import {WidgetType} from "../../Graphql/clientTypes";
 import WorldTimeWidget from "../Widget/worldtimeapi.org/WorldTimeWidget";
 import PornHubWidget from "../Widget/pornhub.com/PornHubWidget";
 import NumberApiWidget from "../Widget/numbersapi.com/NumberApiWidget";
+import IcnbWidget from "../Widget/ICNB.com/ICDNBWidget";
+import CryptocompareWidget from "../Widget/Cryptocompare.com/CrytptocompareWidget";
 
 interface WidgetListMenuProps {
     switchMenu: (val: boolean) => void
@@ -27,6 +29,14 @@ class WidgetListMenu extends React.Component<WidgetListMenuProps> {
                 this.props.openPopup(NumberApiWidget.getInitSettings());
                 this.props.switchMenu(false);
                 break;
+            case WidgetType.Icdnb:
+                this.props.openPopup(IcnbWidget.getInitSettings());
+                this.props.switchMenu(false);
+                break;
+            case WidgetType.Cryptocompare:
+                this.props.openPopup(IcnbWidget.getInitSettings());
+                this.props.switchMenu(false);
+                break;
         }
     }
 
@@ -44,6 +54,14 @@ class WidgetListMenu extends React.Component<WidgetListMenuProps> {
                 <div onClick={() => {this.handleAddCustomWidget(WidgetType.NumbersApi)}} className="new-widget-button" style={WidgetButtonStyle}>
                     <i className="fa-4x far fa-clock"/>
                     Number Fact
+                </div>
+                <div onClick={() => {this.handleAddCustomWidget(WidgetType.Icdnb)}} className="new-widget-button" style={WidgetButtonStyle}>
+                    <i className="fa-4x far fa-clock"/>
+                    Jokes
+                </div>
+                <div onClick={() => {this.handleAddCustomWidget(WidgetType.Cryptocompare)}} className="new-widget-button" style={WidgetButtonStyle}>
+                    <i className="fa-4x far fa-clock"/>
+                    Cryptocompare
                 </div>
             </div>
         )

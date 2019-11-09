@@ -10,7 +10,7 @@ import AppColors from "../Styles/AppColors";
 import PornHubWidget from "../Components/Widget/pornhub.com/PornHubWidget";
 import CryptocompareWidget from "../Components/Widget/Cryptocompare.com/CrytptocompareWidget";
 import NumberApiWidget from "../Components/Widget/numbersapi.com/NumberApiWidget";
-
+import IcnbWidget from "../Components/Widget/ICNB.com/ICDNBWidget";
 interface HomePageState {
     loading: boolean
     data: MeQuerydata | null
@@ -127,6 +127,8 @@ class HomePage extends Component<Object, HomePageState> {
                 return <PornHubWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
             case WidgetType.NumbersApi:
                 return <NumberApiWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
+            case WidgetType.Icdnb:
+                return <IcnbWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
         }
     }
 

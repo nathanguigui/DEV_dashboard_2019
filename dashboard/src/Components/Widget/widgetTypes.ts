@@ -23,3 +23,8 @@ export interface CryptocompareWidgetSettings {
 export interface NumberApiWidgetSettings {
     value: string
 }
+
+export interface IcnbWidgetSettings {
+    explicit: string
+
+}
