@@ -239,9 +239,7 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
         let urlVars: Ph_UrlParams = {category: Ph_Categories.PH_HARDCORE};
         const fetchUrl = pornHubUrlBuilder(urlVars);
         fetch(fetchUrl, {mode: 'no-cors'}).then((promise) => {
-            promise.formData().then((res) => {
-                console.log(res)
-            })
+            console.log(promise)
         })
     }
 
