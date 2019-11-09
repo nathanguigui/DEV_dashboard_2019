@@ -1,7 +1,7 @@
 import {Ph_UrlParams} from "../PornHubWidget";
 
 
-const base_uri = "https://www.pornhub.com/webmasters/search?";
+const base_uri = " https://crossorigin.me/https://www.pornhub.com/webmasters/search?";
 
 export function pornHubUrlBuilder(props: Ph_UrlParams): string {
     let url: string = base_uri;
