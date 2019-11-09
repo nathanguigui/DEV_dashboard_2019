@@ -43,7 +43,7 @@ export const GraphqlClient: ApolloClient<NormalizedCacheObject> = new ApolloClie
     cache: new InMemoryCache(),
     link: ApolloLink.from([
         requestLink,
-        new HttpLink({uri: "http://pastek.space:4000"})
+        new HttpLink({uri: "https://api.nathanguigui.eu"})
     ])
 });
 
