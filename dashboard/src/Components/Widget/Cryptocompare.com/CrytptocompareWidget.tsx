@@ -58,11 +58,9 @@ class CryptocompareWidget extends React.Component<WidgetProps, CryptocompareWidg
 
     getContent(): ReactNode {
         return (
-            this.state.data ?
-                <div>
-                    VALUE: {this.state.data}<br/>
-                </div> :
-                LoadingFc()
+            <div>
+                Fact: {this.state.data}<br/>
+            </div>
         )
     }
 
