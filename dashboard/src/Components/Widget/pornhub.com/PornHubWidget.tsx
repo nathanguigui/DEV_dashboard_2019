@@ -244,7 +244,9 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
     "Accept": "application/json",
       "origin": "https://pastek.space"
   }}).then((promise) => {
-            console.log(promise.body)
+            promise.json().then((res) => {
+                console.log(res)
+            })
         })
     }
 
