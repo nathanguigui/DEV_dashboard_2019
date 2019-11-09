@@ -3,9 +3,8 @@ import "../../Styles/subclass.css"
 import {WidgetType} from "../../Graphql/clientTypes";
 import WorldTimeWidget from "../Widget/worldtimeapi.org/WorldTimeWidget";
 import PornHubWidget from "../Widget/pornhub.com/PornHubWidget";
-import NumberApiWidget from "../Widget/numbersapi.com/NumberApiWidget";
 import IcnbWidget from "../Widget/ICNB.com/ICDNBWidget";
-import CryptocompareWidget from "../Widget/Cryptocompare.com/CrytptocompareWidget";
+import RatesApiWidget from "../Widget/RatesApi.org/RatesApiWidget";
 
 interface WidgetListMenuProps {
     switchMenu: (val: boolean) => void
@@ -29,6 +28,10 @@ class WidgetListMenu extends React.Component<WidgetListMenuProps> {
                 this.props.openPopup(IcnbWidget.getInitSettings());
                 this.props.switchMenu(false);
                 break;
+            case WidgetType.RatesApi:
+                this.props.openPopup(RatesApiWidget.getInitSettings());
+                this.props.switchMenu(false);
+                break;
         }
     }
 
@@ -46,6 +49,10 @@ class WidgetListMenu extends React.Component<WidgetListMenuProps> {
                 <div onClick={() => {this.handleAddCustomWidget(WidgetType.Icdnb)}} className="new-widget-button" style={WidgetButtonStyle}>
                     <i className="fa-4x far fa-clock"/>
                     Jokes
+                </div>
+                <div onClick={() => {this.handleAddCustomWidget(WidgetType.RatesApi)}} className="new-widget-button" style={WidgetButtonStyle}>
+                    <i className="fa-4x far fa-clock"/>
+                    Euro Converter
                 </div>
             </div>
         )

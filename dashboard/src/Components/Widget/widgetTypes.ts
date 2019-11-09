@@ -28,3 +28,7 @@ export interface IcnbWidgetSettings {
     explicit: string
 
 }
+
+export interface RatesApiWidgetSettings {
+    ChangeType: string
+}

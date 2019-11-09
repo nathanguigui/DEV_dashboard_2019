@@ -494,7 +494,8 @@ export enum WidgetType {
   Cryptocompare = 'CRYPTOCOMPARE',
   NumbersApi = 'NUMBERSAPI',
   Icdnb = 'ICDNB',
-  Openweathermap = 'OPENWEATHERMAP'
+  Openweathermap = 'OPENWEATHERMAP',
+  RatesApi = 'RATESAPI'
 }
 
 export type WidgetUpdateInput = {
