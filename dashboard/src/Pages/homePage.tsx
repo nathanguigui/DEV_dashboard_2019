@@ -130,7 +130,7 @@ class HomePage extends Component<Object, HomePageState> {
             case WidgetType.Icdnb:
                 return <IcnbWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
             case WidgetType.Cryptocompare:
-                return <CryptocompareWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={th
+                return <CryptocompareWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
         }
     }
 
