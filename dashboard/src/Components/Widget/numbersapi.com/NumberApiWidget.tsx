@@ -38,7 +38,7 @@ class  NumberApiWidget extends React.Component<WidgetProps, NumberApiWidgetState
         return <AddNumbersApiWidget/>
     }
     updateMe(): void {
-            fetch("http://numbersapi.com/" + this.state.settings.value).then((promise) => {
+            fetch("https://numbersapi.com/" + this.state.settings.value).then((promise) => {
                 promise.text().then((return_value) => {
                     this.setState({data: return_value.toString()})
                 })
@@ -100,4 +100,4 @@ class  NumberApiWidget extends React.Component<WidgetProps, NumberApiWidgetState
 }
 
 
-export default NumberApiWidget
+export default NumberApiWidget;
