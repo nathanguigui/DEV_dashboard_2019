@@ -27,7 +27,7 @@ class AddWordlTimeWidget extends React.Component<Object, AddWordlTimeWidgetState
 
     loadSettingsData(): void {
         if (this.state.timezoneList.length === 0) {
-            fetch("http://worldtimeapi.org/api/timezone").then((promise) => {
+            fetch("https://worldtimeapi.org/api/timezone").then((promise) => {
                 promise.json().then((timezones:Array<string>) => {
                     this.setState({timezoneList: timezones, loading: false})
                 })

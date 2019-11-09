@@ -46,13 +46,13 @@ class WorldTimeWidget extends  React.Component<WidgetProps, WorldTimeWidgetState
 
     updateMe(): void {
         if (this.state.settings.timezone.length) {
-            fetch("http://worldtimeapi.org/api/timezone/" + this.state.selectedTimezoneForm).then((promise) => {
+            fetch("https://worldtimeapi.org/api/timezone/" + this.state.selectedTimezoneForm).then((promise) => {
                 promise.json().then((dataIp) => {
                     this.setState({data: dataIp as WorldTimeApi.Ip})
                 })
             })
         } else {
-            fetch("http://worldtimeapi.org/api/ip").then((promise) => {
+            fetch("https://worldtimeapi.org/api/ip").then((promise) => {
                 promise.json().then((dataIp) => {
                     this.setState({data: dataIp as WorldTimeApi.Ip})
                 })
@@ -62,7 +62,7 @@ class WorldTimeWidget extends  React.Component<WidgetProps, WorldTimeWidgetState
 
     loadSettingsData(): void {
         if (this.state.timezoneList.length === 0) {
-            fetch("http://worldtimeapi.org/api/timezone").then((promise) => {
+            fetch("https://worldtimeapi.org/api/timezone").then((promise) => {
                 promise.json().then((timezones:Array<string>) => {
                     this.setState({timezoneList: timezones})
                 })
