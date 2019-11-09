@@ -42,7 +42,7 @@ class CryptocompareWidget extends React.Component<WidgetProps, CryptocompareWidg
     }
 
     updateMe(): void {
-        fetch("http://min-api.cryptocompare.com/data/price?fsym=" + this.state.CryptoTypeSelected + "&tsyms=" + this.state.ChangeTypeSelected).then((promise) => {
+        fetch("https://min-api.cryptocompare.com/data/price?fsym=" + this.state.CryptoTypeSelected + "&tsyms=" + this.state.ChangeTypeSelected).then((promise) => {
             promise.json().then((USD) => {
                 console.log(USD)
             })

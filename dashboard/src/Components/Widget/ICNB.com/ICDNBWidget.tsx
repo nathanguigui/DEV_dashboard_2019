@@ -39,7 +39,7 @@ class IcnbWidget extends React.Component<WidgetProps, IcnbWidgetState>{
     }
 
     updateMe(): void {
-        fetch("http://api.icndb.com/jokes/random").then((promise) => {
+        fetch("https://api.icndb.com/jokes/random").then((promise) => {
             promise.json().then((return_value) => {
                 let str = JSON.stringify(return_value);
                 let parsing_obj = JSON.parse(str);
