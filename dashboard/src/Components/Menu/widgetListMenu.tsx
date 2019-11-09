@@ -25,16 +25,8 @@ class WidgetListMenu extends React.Component<WidgetListMenuProps> {
                 this.props.openPopup(PornHubWidget.getInitSettings());
                 this.props.switchMenu(false);
                 break;
-            case WidgetType.NumbersApi:
-                this.props.openPopup(NumberApiWidget.getInitSettings());
-                this.props.switchMenu(false);
-                break;
             case WidgetType.Icdnb:
                 this.props.openPopup(IcnbWidget.getInitSettings());
-                this.props.switchMenu(false);
-                break;
-            case WidgetType.Cryptocompare:
-                this.props.openPopup(CryptocompareWidget.getInitSettings());
                 this.props.switchMenu(false);
                 break;
         }
