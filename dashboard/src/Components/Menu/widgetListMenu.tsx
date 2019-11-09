@@ -43,17 +43,9 @@ class WidgetListMenu extends React.Component<WidgetListMenuProps> {
                     <i className="fa-4x far fa-clock"/>
                     PornHub
                 </div>
-                <div onClick={() => {this.handleAddCustomWidget(WidgetType.NumbersApi)}} className="new-widget-button" style={WidgetButtonStyle}>
-                    <i className="fa-4x far fa-clock"/>
-                    Number Fact
-                </div>
                 <div onClick={() => {this.handleAddCustomWidget(WidgetType.Icdnb)}} className="new-widget-button" style={WidgetButtonStyle}>
                     <i className="fa-4x far fa-clock"/>
                     Jokes
-                </div>
-                <div onClick={() => {this.handleAddCustomWidget(WidgetType.Cryptocompare)}} className="new-widget-button" style={WidgetButtonStyle}>
-                    <i className="fa-4x far fa-clock"/>
-                    Cryptocompare
                 </div>
             </div>
         )

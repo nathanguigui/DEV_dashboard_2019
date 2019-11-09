@@ -125,12 +125,8 @@ class HomePage extends Component<Object, HomePageState> {
                 return <WorldTimeWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
             case WidgetType.Pornhub:
                 return <PornHubWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
-            case WidgetType.NumbersApi:
-                return <NumberApiWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
             case WidgetType.Icdnb:
                 return <IcnbWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
-            case WidgetType.Cryptocompare:
-                return <CryptocompareWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
         }
     }
 
