@@ -19,6 +19,7 @@ class PornHubVideoPreview extends React.Component<PornHubVideoPreviewProps, Porn
             isPlayingThumb: false
         };
         this.handleThumbnailsPlay = this.handleThumbnailsPlay.bind(this);
+        this.handleOpenVideo = this.handleOpenVideo.bind(this);
     }
 
     handleThumbnailsPlay = () => {
@@ -27,6 +28,10 @@ class PornHubVideoPreview extends React.Component<PornHubVideoPreviewProps, Porn
                 this.setState({thumbIndex: 0, isPlayingThumb: true})
             }, 500);
         }
+    };
+
+    handleOpenVideo = () => {
+        window.open(this.props.video.url, this.props.video.title);
     };
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
@@ -40,13 +45,13 @@ class PornHubVideoPreview extends React.Component<PornHubVideoPreviewProps, Porn
         }
         return (
             <div style={{...VideoPreviewContainerStyle, margin: "10px"}}>
-                <h4>{this.props.video.title}</h4>
-                <img style={{borderRadius: "5px"}} alt="video preview" onMouseOver={this.handleThumbnailsPlay}
+                <h4 onClick={this.handleOpenVideo} style={{cursor: "pointer"}}>{this.props.video.title}</h4>
+                <img onClick={this.handleOpenVideo} style={{borderRadius: "5px", cursor: "pointer"}} alt="video preview" onMouseOver={this.handleThumbnailsPlay}
                      onMouseLeave={() => {this.setState({isPlayingThumb: false, thumbIndex: 0})}}
                      src={this.props.video.thumbs[this.state.thumbIndex].src}
                 />
                 <div style={VideoPreviewContainerStyle}>
-                    <div style={{...VideoInfosStyle, width: this.props.video.thumbs[0].width}}>
+                    <div style={{...VideoInfosStyle, width: "320px"}}>
                         <div>Duration: {this.props.video.duration}</div>
                         <div>Ratings: {this.props.video.ratings}</div>
                     </div>
