@@ -1,4 +1,4 @@
-import {Ph_UrlParams} from "../PornHubWidget";
+import {Ph_UrlParams} from "../../widgetTypes";
 
 
 const base_uri = "https://cors-anywhere.herokuapp.com/https://www.pornhub.com/webmasters/search?";
