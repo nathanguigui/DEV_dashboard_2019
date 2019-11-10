@@ -132,7 +132,7 @@ const contentStyle : CSSProperties = {
     flexGrow: 10,
     backgroundColor: AppColors.dividerColor,
     transition: "all ease-in-out 0.25s",
-    overflowY: "scroll"
+    overflowY: "auto"
 };
 
 export default SideBar;

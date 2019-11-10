@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, CSSProperties} from "react";
 import {Ph_Video} from "../widgetTypes";
 
 interface PornHubVideoPreviewProps {
@@ -39,15 +39,27 @@ class PornHubVideoPreview extends React.Component<PornHubVideoPreviewProps, Porn
                 this.setState({isPlayingThumb: false, thumbIndex: 0});
         }
         return (
-            <div>
-                {this.props.video.title}
-                <img alt="video preview" onMouseOver={this.handleThumbnailsPlay}
+            <div style={VideoPreviewContainerStyle}>
+                <h4>{this.props.video.title}</h4>
+                <img style={{borderRadius: "5px"}} alt="video preview" onMouseOver={this.handleThumbnailsPlay}
                      onMouseLeave={() => {this.setState({isPlayingThumb: false, thumbIndex: 0})}}
                      src={this.props.video.thumbs[this.state.thumbIndex].src}
                 />
+                <div>
+                    <div>Duration: {this.props.video.duration}</div>
+                    <div>Ratings: {this.props.video.ratings}</div>
+                    <div>Categories: {this.props.video.categories.map((category) => category + " ")}</div>
+                </div>
+
             </div>
         )
     }
 }
+
+const VideoPreviewContainerStyle: CSSProperties = {
+    "display": "flex",
+    "flexDirection": "column",
+    "alignItems": "center"
+};
 
 export default PornHubVideoPreview;
