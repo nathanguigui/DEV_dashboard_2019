@@ -24,14 +24,22 @@ class PornHubVideoPreview extends React.Component<PornHubVideoPreviewProps, Porn
     handleThumbnailsPlay = () => {
         setTimeout(() => {
             this.setState({thumbIndex: this.state.thumbIndex != 16 ? this.state.thumbIndex + 1 : 0, isPlayingThumb: true})
-        }, 1000);
+        }, 200);
     };
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
+        if (this.state.isPlayingThumb) {
+            setTimeout(() => {
+                this.setState({thumbIndex: this.state.thumbIndex != 16 ? this.state.thumbIndex + 1 : 0})
+            }, 200);
+        }
         return (
             <div>
                 {this.props.video.title}
-                <img alt="video preview" onMouseOver={this.handleThumbnailsPlay} src={this.props.video.thumbs[this.state.thumbIndex].src}/>
+                <img alt="video preview" onMouseOver={this.handleThumbnailsPlay}
+                     onMouseLeave={() => {this.setState({isPlayingThumb: false, thumbIndex: 0})}}
+                     src={this.props.video.thumbs[this.state.thumbIndex].src}
+                />
             </div>
         )
     }
