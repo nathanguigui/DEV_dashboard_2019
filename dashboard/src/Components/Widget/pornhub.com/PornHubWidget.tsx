@@ -64,10 +64,10 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
                     <PornHubVideoPreview video={this.state.data.videos[this.state.currentVideoIdx]} />
                     <div style={{display: "flex", justifyContent: "space-evenly", width: "100%"}}>
                         {this.state.currentVideoIdx !== 0 &&
-                        <div onClick={() => this.setState({currentVideoIdx: this.state.currentVideoIdx - 1})}><i className="fas fa-hand-point-left"/></div>
+                        <div style={{cursor: "pointer"}} onClick={() => this.setState({currentVideoIdx: this.state.currentVideoIdx - 1})}><i className="fas fa-hand-point-left"/></div>
                         }
                         {this.state.currentVideoIdx < this.state.data.videos.length &&
-                        <div onClick={() => this.setState({currentVideoIdx: this.state.currentVideoIdx + 1})}><i className="fas fa-hand-point-right"/></div>
+                        <div style={{cursor: "pointer"}} onClick={() => this.setState({currentVideoIdx: this.state.currentVideoIdx + 1})}><i className="fas fa-hand-point-right"/></div>
                         }
                     </div>
                 </div> :
