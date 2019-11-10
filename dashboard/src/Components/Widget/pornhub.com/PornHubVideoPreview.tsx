@@ -45,10 +45,12 @@ class PornHubVideoPreview extends React.Component<PornHubVideoPreviewProps, Porn
                      onMouseLeave={() => {this.setState({isPlayingThumb: false, thumbIndex: 0})}}
                      src={this.props.video.thumbs[this.state.thumbIndex].src}
                 />
-                <div>
-                    <div>Duration: {this.props.video.duration}</div>
-                    <div>Ratings: {this.props.video.ratings}</div>
-                    <div>Categories: {this.props.video.categories.map((category) => category + " ")}</div>
+                <div style={VideoPreviewContainerStyle}>
+                    <div style={VideoInfosStyle}>
+                        <div>Duration: {this.props.video.duration}</div>
+                        <div>Ratings: {this.props.video.ratings}</div>
+                    </div>
+                    <div>Categories: {this.props.video.categories.map((category) => category.category + " ")}</div>
                 </div>
 
             </div>
@@ -60,6 +62,12 @@ const VideoPreviewContainerStyle: CSSProperties = {
     "display": "flex",
     "flexDirection": "column",
     "alignItems": "center"
+};
+
+const VideoInfosStyle: CSSProperties = {
+    "display": "flex",
+    "width": "35%",
+    "justifyContent": "space-between"
 };
 
 export default PornHubVideoPreview;
