@@ -11,6 +11,7 @@ enum WidgetType {
   NUMBERSAPI
   ICDNB
   OPENWEATHERMAP
+  RATESAPI
 }
 
 type Widget {

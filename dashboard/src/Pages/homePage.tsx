@@ -11,6 +11,7 @@ import PornHubWidget from "../Components/Widget/pornhub.com/PornHubWidget";
 import CryptocompareWidget from "../Components/Widget/Cryptocompare.com/CrytptocompareWidget";
 import NumberApiWidget from "../Components/Widget/numbersapi.com/NumberApiWidget";
 import IcnbWidget from "../Components/Widget/ICNB.com/ICDNBWidget";
+import RatesApiWidget from "../Components/Widget/RatesApi.org/RatesApiWidget";
 interface HomePageState {
     loading: boolean
     data: MeQuerydata | null
@@ -125,10 +126,12 @@ class HomePage extends Component<Object, HomePageState> {
                 return <WorldTimeWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
             case WidgetType.Pornhub:
                 return <PornHubWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
-            case WidgetType.NumbersApi:
-                return <NumberApiWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
             case WidgetType.Icdnb:
                 return <IcnbWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
+             case WidgetType.RatesApi:
+                 return <RatesApiWidget widget={widget} moveLeft={this.handleMoveLeftWidget} moveRight={this.handleMoveRightWidget} remove={this.handleRemoveWidget}/>
+
+
         }
     }
 
