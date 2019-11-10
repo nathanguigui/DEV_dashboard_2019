@@ -39,7 +39,7 @@ class PornHubVideoPreview extends React.Component<PornHubVideoPreviewProps, Porn
                 this.setState({isPlayingThumb: false, thumbIndex: 0});
         }
         return (
-            <div style={VideoPreviewContainerStyle}>
+            <div style={{...VideoPreviewContainerStyle, margin: "10px"}}>
                 <h4>{this.props.video.title}</h4>
                 <img style={{borderRadius: "5px"}} alt="video preview" onMouseOver={this.handleThumbnailsPlay}
                      onMouseLeave={() => {this.setState({isPlayingThumb: false, thumbIndex: 0})}}
@@ -66,7 +66,7 @@ const VideoPreviewContainerStyle: CSSProperties = {
 
 const VideoInfosStyle: CSSProperties = {
     "display": "flex",
-    "width": "35%",
+    "width": "100%",
     "justifyContent": "space-between"
 };
 
