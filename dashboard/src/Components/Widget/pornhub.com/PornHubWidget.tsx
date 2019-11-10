@@ -3,6 +3,7 @@ import {PornHubWidgetSettings, WidgetProps} from "../widgetTypes";
 import DefaultWidget from "../DefaultWidget";
 import AddPornHubWidget from "./addPornHubWidget";
 import {pornHubUrlBuilder} from "./utils/urlBuilder";
+import LoadingFc from "../../miniComponent/loading";
 
 export interface Ph_UrlParams {
     search?: string
@@ -170,22 +171,22 @@ export enum Ph_Categories {
     PH_WEBCAM_GAY = "webcam-gay",
 }
 
-export interface Thumb {
+export interface Ph_Thumb {
     size: string;
     width: string;
     height: string;
     src: string;
 }
 
-export interface Tag {
+export interface Ph_Tag {
     tag_name: string;
 }
 
-export interface Category {
-    category: string;
+export interface Ph_Category {
+    category: Ph_Categories;
 }
 
-export interface Video {
+export interface Ph_Video {
     duration: string;
     views: number;
     video_id: string;
@@ -196,21 +197,22 @@ export interface Video {
     default_thumb: string;
     thumb: string;
     publish_date: string;
-    thumbs: Thumb[];
-    tags: Tag[];
+    thumbs: Ph_Thumb[];
+    tags: Ph_Tag[];
     pornstars: any[];
-    categories: Category[];
+    categories: Ph_Category[];
     segment: string;
 }
 
-export interface RootObject {
-    videos: Video[];
+export interface Ph_Response {
+    videos: Ph_Video[];
 }
 
 interface PornHubWidgetState {
     loading: boolean
     settings: PornHubWidgetSettings
     query: string
+    data: Ph_Response | undefined
 }
 
 class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
@@ -220,7 +222,8 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
         this.state = {
             loading: false,
             query: "",
-            settings
+            settings,
+            data: undefined
         };
         this.updateMe = this.updateMe.bind(this);
         this.triggerCornerClick = this.triggerCornerClick.bind(this);
@@ -239,13 +242,14 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
         let urlVars: Ph_UrlParams = {category: Ph_Categories.PH_HARDCORE};
         const fetchUrl = pornHubUrlBuilder(urlVars);
         fetch(fetchUrl, {
-  method: "GET",
-  headers: {
-    "Accept": "application/json",
-      "origin": "https://pastek.space"
-  }}).then((promise) => {
-            promise.json().then((res) => {
-                console.log(res)
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "origin": "https://pastek.space"
+            }
+        }).then((promise) => {
+            promise.json().then((res: Ph_Response) => {
+                this.setState({data: res, loading: false})
             })
         })
     }
@@ -255,9 +259,16 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
     }
 
     getContent(): React.ReactNode {
-        return (<p>
-            toto
-        </p>)
+        return (!this.state.loading && this.state.data ?
+                <div>
+                    {this.state.data.videos.map((video: Ph_Video) =>
+                        <div>
+                            {video.title}
+                        </div>
+                    )}
+                </div> :
+                LoadingFc()
+        )
     }
 
     getSettings(): React.ReactNode {
