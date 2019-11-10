@@ -11,6 +11,7 @@ interface PornHubWidgetState {
     settings: PornHubWidgetSettings
     query: string
     data: Ph_Response | undefined
+    currentVideoIdx: number
 }
 
 class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
@@ -21,7 +22,8 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
             loading: false,
             query: "",
             settings,
-            data: undefined
+            data: undefined,
+            currentVideoIdx: 0
         };
         this.updateMe = this.updateMe.bind(this);
         this.triggerCornerClick = this.triggerCornerClick.bind(this);
@@ -59,9 +61,13 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
     getContent(): React.ReactNode {
         return (!this.state.loading && this.state.data ?
                 <div>
-                    {this.state.data.videos.map((video: Ph_Video) =>
-                        <PornHubVideoPreview video={video} />
-                    )}
+                    {this.state.currentVideoIdx !== 0 &&
+                    <div onClick={() => this.setState({currentVideoIdx: this.state.currentVideoIdx - 1})}>Prev</div>
+                    }
+                    <PornHubVideoPreview video={this.state.data.videos[this.state.currentVideoIdx]} />
+                    {this.state.currentVideoIdx < this.state.data.videos.length &&
+                    <div onClick={() => this.setState({currentVideoIdx: this.state.currentVideoIdx + 1})}>Next</div>
+                    }
                 </div> :
                 LoadingFc()
         )
