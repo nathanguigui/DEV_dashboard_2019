@@ -99,7 +99,6 @@ class SideBar extends React.Component<SideBarProps, SideBarState> {
                                 }
                             </div>
                         :<span/>
-
                     }
                 </div>
                 <div style={!this.props.sidebarDisabled ? {...contentStyle, paddingLeft: "30px", paddingRight: "10px", paddingTop : 15} : {...contentStyle, width: "100%", padding : 15}} className="content">
@@ -132,7 +131,8 @@ const sidebarContentStyle : CSSProperties = {
 const contentStyle : CSSProperties = {
     flexGrow: 10,
     backgroundColor: AppColors.dividerColor,
-    transition: "all ease-in-out 0.25s"
+    transition: "all ease-in-out 0.25s",
+    overflowY: "scroll"
 };
 
 export default SideBar;
