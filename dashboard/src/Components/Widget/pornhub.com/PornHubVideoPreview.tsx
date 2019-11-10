@@ -46,7 +46,7 @@ class PornHubVideoPreview extends React.Component<PornHubVideoPreviewProps, Porn
                      src={this.props.video.thumbs[this.state.thumbIndex].src}
                 />
                 <div style={VideoPreviewContainerStyle}>
-                    <div style={VideoInfosStyle}>
+                    <div style={{...VideoInfosStyle, width: this.props.video.thumbs[0].width}}>
                         <div>Duration: {this.props.video.duration}</div>
                         <div>Ratings: {this.props.video.ratings}</div>
                     </div>
@@ -66,7 +66,6 @@ const VideoPreviewContainerStyle: CSSProperties = {
 
 const VideoInfosStyle: CSSProperties = {
     "display": "flex",
-    "width": "100%",
     "justifyContent": "space-between"
 };
 
