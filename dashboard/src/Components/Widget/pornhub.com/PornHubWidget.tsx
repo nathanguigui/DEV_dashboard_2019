@@ -264,6 +264,7 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
                     {this.state.data.videos.map((video: Ph_Video) =>
                         <div>
                             {video.title}
+                            <img src={video.thumbs[0].src}/>
                         </div>
                     )}
                 </div> :
