@@ -52,7 +52,7 @@ class RatesApiWidget extends React.Component<WidgetProps, RatesApiWidgetState>{
     getContent(): ReactNode {
         return (
             <div>
-                Value of : {this.state.data}{this.state.selectedCurrency}<br/>
+                Value for 1 {this.state.settings.ChangeType} : {this.state.data}{this.state.selectedCurrency}<br/>
             </div>
         )
     }
