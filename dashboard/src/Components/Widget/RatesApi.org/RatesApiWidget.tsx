@@ -37,9 +37,10 @@ class RatesApiWidget extends React.Component<WidgetProps, RatesApiWidgetState>{
         return <AddRatesApiWidget/>
     }
     updateMe(): void {
-        fetch("https://api.ratesapi.io/api/latest?base=EUR&symbols=" + this.state.settings.ChangeType).then((promise) => {
+        fetch("https://api.ratesapi.io/api/latest?base=" + this.state.settings.ChangeType +"&symbols=EUR").then((promise) => {
             promise.json().then((return_value) => {
                 console.log(return_value.rates.USD)
+                this.setState({data: return_value.rates.USD})
             })
         })
     }
@@ -51,7 +52,7 @@ class RatesApiWidget extends React.Component<WidgetProps, RatesApiWidgetState>{
     getContent(): ReactNode {
         return (
             <div>
-                Value of EURO: {this.state.data}{this.state.selectedCurrency}<br/>
+                Value of : {this.state.data}{this.state.selectedCurrency}<br/>
             </div>
         )
     }
