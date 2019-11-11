@@ -39,8 +39,7 @@ class RatesApiWidget extends React.Component<WidgetProps, RatesApiWidgetState>{
     updateMe(): void {
         fetch("https://api.ratesapi.io/api/latest?base=" + this.state.settings.ChangeType +"&symbols=EUR").then((promise) => {
             promise.json().then((return_value) => {
-                console.log(return_value.rates.USD)
-                this.setState({data: return_value.rates.USD})
+                this.setState({data: return_value.rates.USD});
             })
         })
     }
