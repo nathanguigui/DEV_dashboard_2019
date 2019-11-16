@@ -115,7 +115,7 @@ class HomePage extends Component<Object, HomePageState> {
     }
 
     componentDidMount(): void {
-        GraphqlClient.query<MeQuerydata>({query: ME_PROFILE}).then((res) => {
+        GraphqlClient.query({query: ME_PROFILE}).then((res) => {
             this.setState({data: res.data, loading: false})
         })
     }

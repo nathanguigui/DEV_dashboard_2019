@@ -4,8 +4,6 @@ services:
 
   prisma:
     image: prismagraphql/prisma:1.34
-    ports:
-      - '4466:4466'
     networks:
       - prisma-tier
     environment:
@@ -28,7 +26,7 @@ services:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: prisma
     volumes:
-      - ./postgres:/var/lib/postgresql/data
+      - "db-data:/var/lib/postgresql/data"
 
   dashboard-prod:
     container_name: dashboard-prod
@@ -41,17 +39,18 @@ services:
       - prisma-tier
 
   back-end-prod:
+    restart: always
     container_name: back-end-prod
     build:
       context: ./back-end
       dockerfile: Dockerfile
     networks:
       - prisma-tier
-    depends_on:
-      - prisma
-      - postgres
     ports:
       - '4000:4000'
 
 networks:
   prisma-tier:
+
+volumes:
+  db-data:
