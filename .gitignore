@@ -5,3 +5,6 @@ node_modules/
 out/
 package-lock.json
 test.json
+stats
+postgres
+docker-run.sh

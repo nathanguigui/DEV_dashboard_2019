@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+
+  front-end-dev:
+    container_name: front-end-dev
+    build:
+      context: .
+      dockerfile: dashboard/Dockerfile-dev
+    volumes:
+      - '.:/dashboard'
+      - '/dashboard/node_modules'
+    ports:
+      - '3001:3000'
+    environment:
+      - NODE_ENV=development
