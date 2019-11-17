@@ -39,7 +39,6 @@ services:
       - prisma-tier
 
   back-end-prod:
-    restart: always
     container_name: back-end-prod
     build:
       context: ./back-end
@@ -53,4 +52,4 @@ networks:
   prisma-tier:
 
 volumes:
-  db-data:
+  db-data: ~
