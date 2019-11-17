@@ -12,7 +12,8 @@ export interface WorldTimeWidgetSettings {
 }
 
 export interface PornHubWidgetSettings {
-    query: string
+    query: string,
+    category: string
 }
 
 export interface CryptocompareWidgetSettings {
@@ -35,7 +36,7 @@ export interface RatesApiWidgetSettings {
 
 export interface Ph_UrlParams {
     search?: string
-    category?: Ph_Categories
+    category?: string
 }
 
 export enum Ph_Categories {

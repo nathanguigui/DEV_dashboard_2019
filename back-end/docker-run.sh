@@ -2,6 +2,7 @@
 
 rm -rf node_modules/
 prisma generate
+prisma reset -f
 prisma deploy
 while [ $? != 0 ]
 do

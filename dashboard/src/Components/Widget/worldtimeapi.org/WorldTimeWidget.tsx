@@ -119,7 +119,7 @@ class WorldTimeWidget extends  React.Component<WidgetProps, WorldTimeWidgetState
                     <option style={{display: "none"}} value="" disabled>select timezone</option>
                     {this.state.timezoneList.map((timezone: string) => <option value={timezone}>{timezone}</option>)}
                 </select>
-                <button onClick={this.handleSettingsSubmit}>click me</button>
+                <button onClick={this.handleSettingsSubmit}>Update settings</button>
             </form>
         )
     }

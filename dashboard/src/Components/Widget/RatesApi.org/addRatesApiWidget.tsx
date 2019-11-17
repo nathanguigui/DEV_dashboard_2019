@@ -46,7 +46,17 @@ class AddRatesApiWidget extends React.Component<Object, AddRatesApiWidgetState>{
                     <span>Title :</span>
                 </label>
                 <label style={{width: "100%", margin: "20px"}} className="matter-textfield-outlined">
-                    <input onChange={(e:any) => {this.setState({value: e.target.value})}} value={this.state.value} type="input" id="ChangeType" name="ChangeType" placeholder=" "/>
+                    <select onChange={(e:any) => {this.setState({value: e.target.value})}} value={this.state.value} id="ChangeType" name="ChangeType" placeholder=" ">
+                        <option value="GBP">Livre sterling</option>
+                        <option value="HKD">Dollar de Hong Kong</option>
+                        <option value="IDR">Roupie indonésienne</option>
+                        <option value="ILS">Shekel</option>
+                        <option value="DKK">Couronne Danoise</option>
+                        <option value="INR">Roupie indienne</option>
+                        <option value="CNY">Renminbi</option>
+                        <option value="USD">US Dollar</option>
+                        <option value="CAD">Canadian Dollar</option>
+                    </select>
                     <span>Input Monnaie:</span>
                 </label>
             </>

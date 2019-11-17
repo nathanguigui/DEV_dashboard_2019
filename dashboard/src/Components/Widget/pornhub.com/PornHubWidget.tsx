@@ -1,14 +1,18 @@
 import React, {ReactNode} from "react";
-import {Ph_Categories, Ph_Response, Ph_UrlParams, Ph_Video, PornHubWidgetSettings, WidgetProps} from "../widgetTypes";
+import {Ph_Categories, Ph_Response, Ph_UrlParams, PornHubWidgetSettings, WidgetProps} from "../widgetTypes";
 import DefaultWidget from "../DefaultWidget";
 import AddPornHubWidget from "./addPornHubWidget";
 import {pornHubUrlBuilder} from "./utils/urlBuilder";
 import LoadingFc from "../../miniComponent/loading";
 import PornHubVideoPreview from "./PornHubVideoPreview";
+import {MutationUpdateWidgetArgs, WidgetUpdateInput} from "../../../Graphql/clientTypes";
+import {GraphqlClient} from "../../../App";
+import {UPDATE_WIDGET_MUTATION, UpdateWidgetMutationData} from "../../../Graphql/Widget/Mutation/UpdateWidget";
 
 interface PornHubWidgetState {
     loading: boolean
     settings: PornHubWidgetSettings
+    newSettings: PornHubWidgetSettings
     query: string
     data: Ph_Response | undefined
     currentVideoIdx: number
@@ -23,11 +27,14 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
             query: "",
             settings,
             data: undefined,
-            currentVideoIdx: 0
+            currentVideoIdx: 0,
+            newSettings: settings
         };
         this.updateMe = this.updateMe.bind(this);
         this.triggerCornerClick = this.triggerCornerClick.bind(this);
-        this.getContent = this.getContent.bind(this)
+        this.getContent = this.getContent.bind(this);
+        this.handleSettingsChange = this.handleSettingsChange.bind(this);
+        this.handleSettingsSubmit = this.handleSettingsSubmit.bind(this)
     }
 
     static getInitSettings(): ReactNode {
@@ -39,7 +46,7 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
     }
 
     updateMe() {
-        let urlVars: Ph_UrlParams = {category: Ph_Categories.PH_HARDCORE};
+        let urlVars: Ph_UrlParams = {category: this.state.settings.category, search: this.state.query};
         const fetchUrl = pornHubUrlBuilder(urlVars);
         fetch(fetchUrl, {
             method: "GET",
@@ -58,9 +65,22 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
 
     }
 
+    handleSettingsChange(e: any) {
+        let tmp = this.state.newSettings;
+        e.target.name === "query" && (tmp.query = e.target.value);
+        e.target.name === "category" && (tmp.category = e.target.value);
+        console.log(e.target.value);
+        this.setState({newSettings: tmp});
+        this.updateMe();
+    }
+
     getContent(): React.ReactNode {
         return (!this.state.loading && this.state.data ?
                 <div>
+                    <div style={{display: "flex", justifyContent: "space-evenly", width: "100%"}}>
+                        <div>Selected category: {this.state.settings.category}</div>
+                        <div>Query: {this.state.settings.query}</div>
+                    </div>
                     <PornHubVideoPreview video={this.state.data.videos[this.state.currentVideoIdx]} />
                     <div style={{display: "flex", justifyContent: "space-evenly", width: "100%"}}>
                         {this.state.currentVideoIdx !== 0 &&
@@ -75,10 +95,33 @@ class PornHubWidget extends React.Component<WidgetProps, PornHubWidgetState> {
         )
     }
 
+    handleSettingsSubmit(e:any) {
+        e.preventDefault();
+        let tmp: WidgetUpdateInput = {};
+        tmp.title = this.props.widget.title;
+        tmp.settings = JSON.stringify(this.state.newSettings);
+        GraphqlClient.mutate<UpdateWidgetMutationData, MutationUpdateWidgetArgs>({
+            mutation: UPDATE_WIDGET_MUTATION,
+            variables: {data: tmp, where: {id: this.props.widget.id}}
+        }).then((res) => {
+            this.setState({settings: this.state.newSettings})
+        })
+    }
+
     getSettings(): React.ReactNode {
-        return (<p>
-            toto
-        </p>)
+        return (<form>
+            <label style={{width: "100%", margin: "20px"}} className="matter-textfield-outlined">
+                <input onChange={this.handleSettingsChange} value={this.state.newSettings.query} type="text" id="query" name="query" placeholder=" "/>
+                <span>Default query :</span>
+            </label>
+            <label style={{width: "100%", margin: "20px"}} className="matter-textfield-outlined">
+                <select onChange={this.handleSettingsChange} value={this.state.newSettings.category} id="category" name="category" placeholder=" ">
+                    {AddPornHubWidget.mapCategoryEnum()}
+                </select>
+                <span>Default category :</span>
+            </label>
+            <button onClick={this.handleSettingsSubmit}>Save settings</button>
+        </form>)
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
