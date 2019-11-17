@@ -5,6 +5,7 @@ import WorldTimeWidget from "../Widget/worldtimeapi.org/WorldTimeWidget";
 import PornHubWidget from "../Widget/pornhub.com/PornHubWidget";
 import IcnbWidget from "../Widget/ICNB.com/ICDNBWidget";
 import RatesApiWidget from "../Widget/RatesApi.org/RatesApiWidget";
+import WeatherWidget from "../Widget/OpenWeatherApi/OpenWeatherApi";
 
 interface WidgetListMenuProps {
     switchMenu: (val: boolean) => void
@@ -32,6 +33,10 @@ class WidgetListMenu extends React.Component<WidgetListMenuProps> {
                 this.props.openPopup(RatesApiWidget.getInitSettings());
                 this.props.switchMenu(false);
                 break;
+            case WidgetType.Openweathermap:
+                this.props.openPopup(WeatherWidget.getInitSettings());
+                this.props.switchMenu(false);
+                break;
         }
     }
 
@@ -43,16 +48,20 @@ class WidgetListMenu extends React.Component<WidgetListMenuProps> {
                     World Time
                 </div>
                 <div onClick={() => {this.handleAddCustomWidget(WidgetType.Pornhub)}} className="new-widget-button" style={WidgetButtonStyle}>
-                    <i className="fa-4x far fa-clock"/>
+                    <i className="fa-4x far fa-warning"/>
                     PornHub
                 </div>
                 <div onClick={() => {this.handleAddCustomWidget(WidgetType.Icdnb)}} className="new-widget-button" style={WidgetButtonStyle}>
-                    <i className="fa-4x far fa-clock"/>
+                    <i className="fa-4x far fa-file-movie-o"/>
                     Jokes
                 </div>
                 <div onClick={() => {this.handleAddCustomWidget(WidgetType.RatesApi)}} className="new-widget-button" style={WidgetButtonStyle}>
-                    <i className="fa-4x far fa-clock"/>
+                    <i className="fa-4x far fa-euro"/>
                     Euro Converter
+                </div>
+                <div onClick={() => {this.handleAddCustomWidget(WidgetType.Openweathermap)}} className="new-widget-button" style={WidgetButtonStyle}>
+                    <i className="fa-4x far fa-cloud"/>
+                    Weather
                 </div>
             </div>
         )
