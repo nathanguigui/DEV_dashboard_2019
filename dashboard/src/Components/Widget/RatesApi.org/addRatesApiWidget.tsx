@@ -6,7 +6,7 @@ import {AddWidgetForm} from "../utils/addWidgetForm";
 
 interface AddRatesApiWidgetState {
     name: string
-    ChangeType: string
+    value: string
     loading: boolean
 }
 
@@ -15,7 +15,7 @@ class AddRatesApiWidget extends React.Component<Object, AddRatesApiWidgetState>{
         super(props);
         this.state = {
             name: "",
-            ChangeType: "",
+            value: "",
             loading: true
         };
         this.createWidget = this.createWidget.bind(this);
@@ -26,7 +26,7 @@ class AddRatesApiWidget extends React.Component<Object, AddRatesApiWidgetState>{
 
     createWidget = () => {
         let newWidget: WidgetCreateInput = {
-            settings: '{"value": "' + this.state.ChangeType + '"}',
+            settings: '{"ChangeType": "' + this.state.value + '"}',
             title: this.state.name,
             type: WidgetType.RatesApi,
             order: AUTO_WIDGET_ORDER
@@ -46,7 +46,7 @@ class AddRatesApiWidget extends React.Component<Object, AddRatesApiWidgetState>{
                     <span>Title :</span>
                 </label>
                 <label style={{width: "100%", margin: "20px"}} className="matter-textfield-outlined">
-                    <select onChange={(e:any) => {this.setState({ChangeType: e.target.value})}} value={this.state.ChangeType} id="ChangeType" name="ChangeType" placeholder=" ">
+                    <select onChange={(e:any) => {this.setState({value: e.target.value})}} value={this.state.value} id="ChangeType" name="ChangeType" placeholder=" ">
                         <option value="GBP">Livre sterling</option>
                         <option value="HKD">Dollar de Hong Kong</option>
                         <option value="IDR">Roupie indonésienne</option>
