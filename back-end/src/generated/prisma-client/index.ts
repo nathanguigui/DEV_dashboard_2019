@@ -140,7 +140,15 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type WidgetType = "WORLD_TIME";
+export type WidgetType =
+  | "WORLD_TIME"
+  | "PORNHUB"
+  | "XVIDEO"
+  | "CRYPTOCOMPARE"
+  | "NUMBERSAPI"
+  | "ICDNB"
+  | "OPENWEATHERMAP"
+  | "RATESAPI";
 
 export type WidgetOrderByInput =
   | "id_ASC"
@@ -150,7 +158,9 @@ export type WidgetOrderByInput =
   | "settings_ASC"
   | "settings_DESC"
   | "title_ASC"
-  | "title_DESC";
+  | "title_DESC"
+  | "order_ASC"
+  | "order_DESC";
 
 export type UserType = "ADMIN" | "USER";
 
@@ -281,6 +291,14 @@ export interface WidgetWhereInput {
   title_not_starts_with?: Maybe<String>;
   title_ends_with?: Maybe<String>;
   title_not_ends_with?: Maybe<String>;
+  order?: Maybe<Int>;
+  order_not?: Maybe<Int>;
+  order_in?: Maybe<Int[] | Int>;
+  order_not_in?: Maybe<Int[] | Int>;
+  order_lt?: Maybe<Int>;
+  order_lte?: Maybe<Int>;
+  order_gt?: Maybe<Int>;
+  order_gte?: Maybe<Int>;
   AND?: Maybe<WidgetWhereInput[] | WidgetWhereInput>;
   OR?: Maybe<WidgetWhereInput[] | WidgetWhereInput>;
   NOT?: Maybe<WidgetWhereInput[] | WidgetWhereInput>;
@@ -290,12 +308,14 @@ export interface WidgetUpdateManyDataInput {
   type?: Maybe<WidgetType>;
   settings?: Maybe<String>;
   title?: Maybe<String>;
+  order?: Maybe<Int>;
 }
 
 export interface WidgetUpdateDataInput {
   type?: Maybe<WidgetType>;
   settings?: Maybe<String>;
   title?: Maybe<String>;
+  order?: Maybe<Int>;
 }
 
 export interface WidgetUpdateManyWithWhereNestedInput {
@@ -355,6 +375,14 @@ export interface WidgetScalarWhereInput {
   title_not_starts_with?: Maybe<String>;
   title_ends_with?: Maybe<String>;
   title_not_ends_with?: Maybe<String>;
+  order?: Maybe<Int>;
+  order_not?: Maybe<Int>;
+  order_in?: Maybe<Int[] | Int>;
+  order_not_in?: Maybe<Int[] | Int>;
+  order_lt?: Maybe<Int>;
+  order_lte?: Maybe<Int>;
+  order_gt?: Maybe<Int>;
+  order_gte?: Maybe<Int>;
   AND?: Maybe<WidgetScalarWhereInput[] | WidgetScalarWhereInput>;
   OR?: Maybe<WidgetScalarWhereInput[] | WidgetScalarWhereInput>;
   NOT?: Maybe<WidgetScalarWhereInput[] | WidgetScalarWhereInput>;
@@ -375,6 +403,7 @@ export interface WidgetUpdateManyMutationInput {
   type?: Maybe<WidgetType>;
   settings?: Maybe<String>;
   title?: Maybe<String>;
+  order?: Maybe<Int>;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -417,6 +446,7 @@ export interface WidgetCreateInput {
   type: WidgetType;
   settings: String;
   title: String;
+  order: Int;
 }
 
 export interface WidgetCreateManyInput {
@@ -438,6 +468,7 @@ export interface WidgetUpdateInput {
   type?: Maybe<WidgetType>;
   settings?: Maybe<String>;
   title?: Maybe<String>;
+  order?: Maybe<Int>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -651,6 +682,7 @@ export interface WidgetPreviousValues {
   type: WidgetType;
   settings: String;
   title: String;
+  order: Int;
 }
 
 export interface WidgetPreviousValuesPromise
@@ -660,6 +692,7 @@ export interface WidgetPreviousValuesPromise
   type: () => Promise<WidgetType>;
   settings: () => Promise<String>;
   title: () => Promise<String>;
+  order: () => Promise<Int>;
 }
 
 export interface WidgetPreviousValuesSubscription
@@ -669,6 +702,7 @@ export interface WidgetPreviousValuesSubscription
   type: () => Promise<AsyncIterator<WidgetType>>;
   settings: () => Promise<AsyncIterator<String>>;
   title: () => Promise<AsyncIterator<String>>;
+  order: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface UserEdge {
@@ -693,6 +727,7 @@ export interface Widget {
   type: WidgetType;
   settings: String;
   title: String;
+  order: Int;
 }
 
 export interface WidgetPromise extends Promise<Widget>, Fragmentable {
@@ -700,6 +735,7 @@ export interface WidgetPromise extends Promise<Widget>, Fragmentable {
   type: () => Promise<WidgetType>;
   settings: () => Promise<String>;
   title: () => Promise<String>;
+  order: () => Promise<Int>;
 }
 
 export interface WidgetSubscription
@@ -709,6 +745,7 @@ export interface WidgetSubscription
   type: () => Promise<AsyncIterator<WidgetType>>;
   settings: () => Promise<AsyncIterator<String>>;
   title: () => Promise<AsyncIterator<String>>;
+  order: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface WidgetNullablePromise
@@ -718,6 +755,7 @@ export interface WidgetNullablePromise
   type: () => Promise<WidgetType>;
   settings: () => Promise<String>;
   title: () => Promise<String>;
+  order: () => Promise<Int>;
 }
 
 export interface WidgetSubscriptionPayload {
@@ -1114,6 +1152,6 @@ export const models: Model[] = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `http://localhost:4466`
+  endpoint: `http://prisma:4466`
 });
 export const prisma = new Prisma();

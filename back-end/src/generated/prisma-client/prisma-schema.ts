@@ -423,6 +423,7 @@ type Widget {
   type: WidgetType!
   settings: String!
   title: String!
+  order: Int!
 }
 
 type WidgetConnection {
@@ -436,6 +437,7 @@ input WidgetCreateInput {
   type: WidgetType!
   settings: String!
   title: String!
+  order: Int!
 }
 
 input WidgetCreateManyInput {
@@ -457,6 +459,8 @@ enum WidgetOrderByInput {
   settings_DESC
   title_ASC
   title_DESC
+  order_ASC
+  order_DESC
 }
 
 type WidgetPreviousValues {
@@ -464,6 +468,7 @@ type WidgetPreviousValues {
   type: WidgetType!
   settings: String!
   title: String!
+  order: Int!
 }
 
 input WidgetScalarWhereInput {
@@ -513,6 +518,14 @@ input WidgetScalarWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  order: Int
+  order_not: Int
+  order_in: [Int!]
+  order_not_in: [Int!]
+  order_lt: Int
+  order_lte: Int
+  order_gt: Int
+  order_gte: Int
   AND: [WidgetScalarWhereInput!]
   OR: [WidgetScalarWhereInput!]
   NOT: [WidgetScalarWhereInput!]
@@ -538,24 +551,34 @@ input WidgetSubscriptionWhereInput {
 
 enum WidgetType {
   WORLD_TIME
+  PORNHUB
+  XVIDEO
+  CRYPTOCOMPARE
+  NUMBERSAPI
+  ICDNB
+  OPENWEATHERMAP
+  RATESAPI
 }
 
 input WidgetUpdateDataInput {
   type: WidgetType
   settings: String
   title: String
+  order: Int
 }
 
 input WidgetUpdateInput {
   type: WidgetType
   settings: String
   title: String
+  order: Int
 }
 
 input WidgetUpdateManyDataInput {
   type: WidgetType
   settings: String
   title: String
+  order: Int
 }
 
 input WidgetUpdateManyInput {
@@ -574,6 +597,7 @@ input WidgetUpdateManyMutationInput {
   type: WidgetType
   settings: String
   title: String
+  order: Int
 }
 
 input WidgetUpdateManyWithWhereNestedInput {
@@ -639,6 +663,14 @@ input WidgetWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  order: Int
+  order_not: Int
+  order_in: [Int!]
+  order_not_in: [Int!]
+  order_lt: Int
+  order_lte: Int
+  order_gt: Int
+  order_gte: Int
   AND: [WidgetWhereInput!]
   OR: [WidgetWhereInput!]
   NOT: [WidgetWhereInput!]

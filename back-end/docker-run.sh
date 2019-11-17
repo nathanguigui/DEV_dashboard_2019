@@ -1,12 +1,13 @@
 #!/bin/sh
 
+rm -rf node_modules/
+prisma generate
 prisma deploy
-status=$?
-while [ $status != 0 ]
+while [ $? != 0 ]
 do
-  prisma deploy
-  status=$?
   sleep 3
+  prisma deploy
 done
+npm i
 npm run start
 exit 0
