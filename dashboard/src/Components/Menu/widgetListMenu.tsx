@@ -48,19 +48,19 @@ class WidgetListMenu extends React.Component<WidgetListMenuProps> {
                     World Time
                 </div>
                 <div onClick={() => {this.handleAddCustomWidget(WidgetType.Pornhub)}} className="new-widget-button" style={WidgetButtonStyle}>
-                    <i className="fa-4x far fa-warning"/>
+                    <i className="fa-4x fas fa-radiation"/>
                     PornHub
                 </div>
                 <div onClick={() => {this.handleAddCustomWidget(WidgetType.Icdnb)}} className="new-widget-button" style={WidgetButtonStyle}>
-                    <i className="fa-4x far fa-file-movie-o"/>
+                    <i className="fa-4x fas fa-film"/>
                     Jokes
                 </div>
                 <div onClick={() => {this.handleAddCustomWidget(WidgetType.RatesApi)}} className="new-widget-button" style={WidgetButtonStyle}>
-                    <i className="fa-4x far fa-euro"/>
+                    <i className="fa-4x fas fa-shekel"/>
                     Euro Converter
                 </div>
                 <div onClick={() => {this.handleAddCustomWidget(WidgetType.Openweathermap)}} className="new-widget-button" style={WidgetButtonStyle}>
-                    <i className="fa-4x far fa-cloud"/>
+                    <i className="fa-4x fas fa-cloud-sun-rain"/>
                     Weather
                 </div>
             </div>
