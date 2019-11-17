@@ -1,0 +1,31 @@
+{
+  "client": {
+    "host ": "127.0.0.1"
+  },
+  "server": {
+    "current_time": 1531680780 ,
+    "services": [{
+      "name":"world_time_api",
+      "widgets": [{
+        "name":"timezone_time",
+        "description":"Display time for a timezone",
+        "params": [{
+          "name":"timezone",
+          "type":"string"
+        }]
+      }]}, {
+      "name":"pornhub",
+      "widgets": [{
+        "name":"category_list",
+        "description":"Displaying the list of the last pornhub video per category",
+        "params": [{
+          "category":"query",
+          "type":"string"
+        },{
+          "name":"category",
+          "type":"string"
+        }]
+      }]
+    }]
+  }
+}
