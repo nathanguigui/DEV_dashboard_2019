@@ -72,13 +72,23 @@ class RatesApiWidget extends React.Component<WidgetProps, RatesApiWidgetState>{
     }
 
     handleSettingsChange(e:any) {
-        e.target.name === "value" && (this.setState( {selectedCurrency: e.target.value}))
+        e.target.name === "ChangeType" && (this.setState( {selectedCurrency: e.target.value}))
     }
     getSettings(): ReactNode {
         return (
             <form>
                 <label style={{width: "100%", margin: "20px"}} className="matter-textfield-outlined">
-                    <input onChange={this.handleSettingsChange} value={this.state.selectedCurrency} type="value" id="value" name="value" placeholder=" "/>
+                    <select onChange={(e:any) => {this.setState({selectedCurrency: e.target.value})}} value={this.state.selectedCurrency} id="ChangeType" name="ChangeType" placeholder=" ">
+                        <option value="GBP">Livre sterling</option>
+                        <option value="HKD">Dollar de Hong Kong</option>
+                        <option value="IDR">Roupie indonésienne</option>
+                        <option value="ILS">Shekel</option>
+                        <option value="DKK">Couronne Danoise</option>
+                        <option value="INR">Roupie indienne</option>
+                        <option value="CNY">Renminbi</option>
+                        <option value="USD">US Dollar</option>
+                        <option value="CAD">Canadian Dollar</option>
+                    </select>
                     <span>Input a number:</span>
                 </label>
                 <button onClick={this.handleSettingsSubmit}>click me</button>

@@ -26,6 +26,27 @@
           "type":"string"
         }]
       }]
-    }]
+    },{
+      "name":"jokes",
+      "widgets":[{
+        "name":"jokes",
+        "description":"Chuck Norris Jokes",
+        "params": [{
+          "name":"explicit",
+          "type":"string"
+        }]
+      }]    
+    }, {
+      "name":"euroconverter",
+      "widgets":[{
+        "name":"euroconverter",
+        "description":"Display the value of other change in euro",
+        "params":[{
+          "name":"change",
+          "type":"string"
+        }]
+      }]
+    }
+  ]
   }
 }
