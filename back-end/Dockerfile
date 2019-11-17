@@ -10,4 +10,4 @@ RUN npm install prisma -g --silent
 COPY . /back-end
 RUN prisma generate
 RUN npm install --silent
-CMD ["/back-end/docker-run.sh"]
+CMD ["./docker-run.sh"]
