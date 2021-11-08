@@ -5,7 +5,7 @@
     "start": "ts-node-dev --no-notify --respawn --transpileOnly ./src"
   },
   "dependencies": {
-    "apollo-server": "^2.8.1",
+    "apollo-server": "^2.25.3",
     "bcrypt": "3.0.6",
     "graphql": "^14.4.2",
     "graphql-middleware": "^3.0.3",
